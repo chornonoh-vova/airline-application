@@ -18,7 +18,8 @@ create table flights (
 create table tickets (
 	ticket_id int not null primary key auto_increment,
 	flight_id int not null,
-	passenger_id int not null
+	passenger_id int not null,
+	seat varchar(5) not null
 );
 
 create table airplanes (
@@ -26,7 +27,8 @@ create table airplanes (
 	airplane_number int not null,
 	model varchar(50) default '',
 	manufacture_date date,
-	lifetime int default 5
+	lifetime int default 5,
+	seat_number int not null
 );
 
 create table passengers (
