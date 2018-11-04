@@ -1,0 +1,41 @@
+version: "3.3"
+services:
+  database:
+    image: mariadb:10.3.10
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3306:3306"
+    volumes:
+      - airline_database_data:/var/lib/mysql
+      - ../../sql/database.sql:/docker-entrypoint-initdb.d/database.sql
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      MYSQL_DATABASE: airline
+      MYSQL_USER: airline_database_admin
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+    secrets:
+      - mysql_password
+      - mysql_root_password
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "5000:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+volumes:
+  airline_database_data:
+    external: true
+
+secrets:
+  mysql_root_password:
+    external: true
+  mysql_password:
+    external: true
