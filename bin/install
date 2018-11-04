@@ -29,6 +29,9 @@ openssl rand -base64 20 | tr -d '\n' | init_secret mysql_root_password -
 # creating volume
 docker volume create airline_database_data
 
+# building image for airline api
+(cd ..; docker build -t airline-api api -f etc/docker/images/Dockerfile.api)
+
 # deploying application
 docker stack deploy -c ../etc/docker/stack/docker-compose.yml airline
 

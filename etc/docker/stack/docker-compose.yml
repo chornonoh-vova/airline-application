@@ -20,6 +20,20 @@ services:
       - mysql_password
       - mysql_root_password
 
+  api:
+    image: airline-api
+    depends_on:
+      - database
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8080:8080"
+    secrets:
+      - mysql_password
+    command: ["java", "-jar", "/app/build/libs/airline-api-0.0.1.jar"]
+
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
