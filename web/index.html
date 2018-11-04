@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Авиакомпания</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+	<!-- Шапка + меню -->
+	<header class="header">
+		<div class="nav-menu">
+			<ul>
+				
+				<li class="li-a"><a href="#main">главная</a></li>
+				<li class="li-a"><a href="#price">цены</a></li>
+				<li class="li-a"><a href="#about">про нас</a></li>
+				<li class="li-a"><a href="#contact">контакты</a></li>
+				<li class="user-btn" id="regBtn"><a href="#">Регистрация</a></li>
+				<li class="user-btn" id="logBtn"><a href="#">Вход</a></li>
+			</ul>
+		</div>
+		
+		<!-- Окно регистрации -->
+		<div id="regModal" class="reg-modal">
+  		<!-- Содержимое окна -->
+			<div class="reg-modal-content">
+			    <span class="close">&times;</span>
+			    <form action="register-form.php">
+			    	<div class="reg-content">
+			    		<h1>Регистрация</h1>
+			    		<hr>
+			    			<label class="lab-data" for="email"><b>Электронная почта</b></label>
+			    			<input class="inp-data" type="text" placeholder="Ваш email" name="email" required>
+			    			<label class="lab-data" for="pass"><b>Пароль</b></label>
+			    			<input class="inp-data" type="password" placeholder="Введите пароль" name="password" required>
+			    			<label class="lab-data" for="pass-repeat"><b>Повторите пароль</b></label>
+			    			<input class="inp-data" type="password" placeholder="Повторите пароль" name="password-repeat" required>
+			    		<hr>
+			    		<button class="reg-btn" type="submit">Зарегистрироваться</button>
+			    	</div>
+			    </form>
+			</div>
+		</div>
+
+		<!-- Окно логина -->
+		<div id="logModal" class="log-modal">
+  		<!-- Содержимое окна -->
+			<div class="log-modal-content">
+			    <span class="close">&times;</span>
+			    <form action="login-form.php">
+			    	<div class="log-content">
+			    		<h1>Авторизация</h1>
+			    		<hr>
+			    			<label class="lab-data" for="email"><b>Электронная почта</b></label>
+			    			<input class="inp-data" type="text" placeholder="Ваш email" name="email" required>
+			    			<label class="lab-data" for="pass"><b>Пароль</b></label>
+			    			<input class="inp-data" type="password" placeholder="Введите пароль" name="password" required>
+			    		<hr>
+			    		<button class="reg-btn" type="submit">Вход</button>
+			    	</div>
+			    </form>
+			</div>
+		</div>
+		<div class="header-bg"></div>
+	</header>
+	<!-- Блок с новостями, и поиском билетов -->
+	<div class="main-content">
+		<div class="news-conteiner"></div>
+		<div class="find-tickets"></div>
+	</div>
+
+	<script src="js/script.js"></script>
+</body>
+</html>
