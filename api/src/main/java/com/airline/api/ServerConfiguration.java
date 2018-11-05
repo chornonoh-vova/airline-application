@@ -44,10 +44,8 @@ public class ServerConfiguration {
     dataSource.setUsername(env.getRequiredProperty(DB_USERNAME));
     try {
       File passwordSecret = new File("/run/secrets/mysql_password");
-      System.out.println("Password secret:" + passwordSecret);
       byte[] passwordBytes = Files.readAllBytes(passwordSecret.toPath());
       String password = new String(passwordBytes);
-      System.out.println("Password bytes: " + password);
       dataSource.setPassword(password);
     } catch (IOException e) {
       System.out.println(e.getMessage());

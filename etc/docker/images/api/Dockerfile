@@ -6,4 +6,4 @@ COPY . /app
 
 WORKDIR /app
 
-RUN ["gradle", "bootJar", "--info"]
+RUN ["gradle", "bootJar"]
