@@ -42,16 +42,7 @@ public class ServerConfiguration {
     dataSource.setDriverClassName(env.getRequiredProperty(DB_DRIVER));
     dataSource.setUrl(env.getRequiredProperty(DB_URL));
     dataSource.setUsername(env.getRequiredProperty(DB_USERNAME));
-    try {
-      File passwordSecret = new File("/run/secrets/mysql_password");
-      byte[] passwordBytes = Files.readAllBytes(passwordSecret.toPath());
-      String password = new String(passwordBytes);
-      dataSource.setPassword(password);
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-      System.exit(1);
-    }
+    dataSource.setPassword(App.password);
     return dataSource;
   }
 
