@@ -41,7 +41,7 @@ create table passengers (
 
 create table users (
     user_id int not null primary key auto_increment,
-    email varchar(50),
+    email varchar(50) unique,
     password char(64),
     passenger_id int,
     role varchar(10)
@@ -50,7 +50,7 @@ create table users (
 create table sessions (
     session_id int not null primary key auto_increment,
     user_id int not null,
-    session_key char(64) not null
+    session_key char(64) not null unique
 );
 
 create table pilots (

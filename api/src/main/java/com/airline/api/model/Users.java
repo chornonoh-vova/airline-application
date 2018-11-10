@@ -1,29 +1,35 @@
 package com.airline.api.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.airline.api.utils.JsendData;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class Users implements Serializable {
+public class Users implements Serializable, JsendData {
   @Id
   @Column(name = "user_id")
   private int userId;
+
   @Column(name = "email")
   private String email;
+
   @Column(name = "password")
   private String password;
-  @Column(name = "passenger_id")
-  private int passengerId;
+
+  @OneToOne
+  @JoinColumn(name = "passenger_id")
+  private Passengers passengers;
+
+  @OneToMany(mappedBy = "users")
+  private List<Sessions> sessions;
+
   @Column(name = "role")
   private String role;
 
-  public Users() {
-
-  }
+  public Users() {}
 
   public int getUserId() {
     return userId;
@@ -49,19 +55,27 @@ public class Users implements Serializable {
     this.password = password;
   }
 
-  public int getPassengerId() {
-    return passengerId;
-  }
-
-  public void setPassengerId(int passengerId) {
-    this.passengerId = passengerId;
-  }
-
   public String getRole() {
     return role;
   }
 
   public void setRole(String role) {
     this.role = role;
+  }
+
+  public Passengers getPassengers() {
+    return passengers;
+  }
+
+  public void setPassengers(Passengers passengers) {
+    this.passengers = passengers;
+  }
+
+  public List<Sessions> getSessions() {
+    return sessions;
+  }
+
+  public void setSessions(List<Sessions> sessions) {
+    this.sessions = sessions;
   }
 }

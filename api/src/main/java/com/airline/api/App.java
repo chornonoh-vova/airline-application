@@ -6,16 +6,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
 @SpringBootApplication
 public class App {
+  private static final String url =
+      "jdbc:mysql://"
+          + System.getenv("MYSQL_DATABASE_HOST")
+          + ":"
+          + System.getenv("MYSQL_DATABASE_PORT")
+          + "/"
+          + System.getenv("MYSQL_DATABASE");
   static String password = null;
-  private static final String url = "jdbc:mysql://" + System.getenv("MYSQL_DATABASE_HOST") + ":" +
-      System.getenv("MYSQL_DATABASE_PORT") + "/" + System.getenv("MYSQL_DATABASE");
 
   public static void main(String[] args) throws InterruptedException {
     File passwordSecret = new File(System.getenv("MYSQL_PASSWORD_FILE"));
