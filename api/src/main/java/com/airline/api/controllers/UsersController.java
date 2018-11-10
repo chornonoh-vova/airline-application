@@ -61,11 +61,11 @@ public class UsersController {
   }
 
   public static class Message implements JsendData {
+    public String message;
+
     public Message(String message) {
       this.message = message;
     }
-
-    public String message;
   }
 
   public static class LoginRequest {
@@ -92,8 +92,9 @@ public class UsersController {
   }
 
   public static class LogoutRequest {
-    public LogoutRequest() {}
     String sessionKey;
+
+    public LogoutRequest() {}
 
     public String getSessionKey() {
       return sessionKey;
