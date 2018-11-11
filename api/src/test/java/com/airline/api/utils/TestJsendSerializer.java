@@ -48,7 +48,7 @@ public class TestJsendSerializer {
     JsendResponse res = new JsendResponse("success", user);
     String json = new ObjectMapper().writeValueAsString(res);
     String userJson = new ObjectMapper().writeValueAsString(user);
-    Assert.assertNotEquals("{\"status\":\"success\",\"data\":" + userJson + "}", json);
+    Assert.assertEquals("{\"status\":\"success\",\"data\":" + userJson + "}", json);
   }
 
   @Test
