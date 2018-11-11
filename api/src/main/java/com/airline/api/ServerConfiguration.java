@@ -14,9 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Properties;
 
 @Configuration
@@ -33,8 +30,7 @@ public class ServerConfiguration {
   private static final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
   private static final String ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
 
-  @Resource
-  private Environment env;
+  @Resource private Environment env;
 
   @Bean
   public DataSource dataSource() {
@@ -42,25 +38,18 @@ public class ServerConfiguration {
     dataSource.setDriverClassName(env.getRequiredProperty(DB_DRIVER));
     dataSource.setUrl(env.getRequiredProperty(DB_URL));
     dataSource.setUsername(env.getRequiredProperty(DB_USERNAME));
-    try {
-      File passwordSecret = new File("/run/secrets/mysql_password");
-      byte[] passwordBytes = Files.readAllBytes(passwordSecret.toPath());
-      String password = new String(passwordBytes);
-      dataSource.setPassword(password);
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-      System.exit(1);
-    }
+    dataSource.setPassword(App.password);
     return dataSource;
   }
 
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-    LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+    LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
+        new LocalContainerEntityManagerFactoryBean();
     entityManagerFactoryBean.setDataSource(dataSource());
     entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-    entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(ENTITYMANAGER_PACKAGES_TO_SCAN));
+    entityManagerFactoryBean.setPackagesToScan(
+        env.getRequiredProperty(ENTITYMANAGER_PACKAGES_TO_SCAN));
     entityManagerFactoryBean.setJpaProperties(hibProperties());
     return entityManagerFactoryBean;
   }

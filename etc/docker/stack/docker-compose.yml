@@ -30,6 +30,12 @@ services:
         condition: on-failure
     ports:
       - "8080:8080"
+    environment:
+      MYSQL_DATABASE_HOST: database
+      MYSQL_DATABASE_PORT: 3306
+      MYSQL_DATABASE: airline
+      MYSQL_USER: airline_database_admin
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
     secrets:
       - mysql_password
     command: ["java", "-jar", "/app/build/libs/airline-api-0.0.1.jar"]
