@@ -6,4 +6,4 @@ COPY . /app
 
 WORKDIR /app
 
-RUN gradle bootJar
+RUN gradle bootJar --parallel --console=verbose

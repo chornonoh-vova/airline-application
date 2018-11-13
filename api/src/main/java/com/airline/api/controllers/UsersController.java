@@ -4,6 +4,7 @@ import com.airline.api.model.Sessions;
 import com.airline.api.services.AuthService;
 import com.airline.api.utils.JsendData;
 import com.airline.api.utils.JsendResponse;
+import com.airline.api.utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,25 +48,17 @@ public class UsersController {
     }
   }
 
-  @PostMapping("/registrate")
+  @PostMapping("/register")
   @ResponseBody
-  public JsendResponse registrate(@RequestBody LoginRequest body) {
+  public JsendResponse register(@RequestBody LoginRequest body) {
     JsendResponse resp;
     try {
       authService.registrate(body.email, body.password);
-      resp = new JsendResponse("success", new Message("User registrated"));
+      resp = new JsendResponse("success", new Message("User registered"));
     } catch (Exception e) {
       resp = new JsendResponse("fail", new Message(e.getMessage()));
     }
     return resp;
-  }
-
-  public static class Message implements JsendData {
-    public String message;
-
-    public Message(String message) {
-      this.message = message;
-    }
   }
 
   public static class LoginRequest {
