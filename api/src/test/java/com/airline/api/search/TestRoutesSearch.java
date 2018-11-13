@@ -37,29 +37,29 @@ public class TestRoutesSearch {
 
   @Test
   public void testFrom() {
-    RouteCriteria c = new FromCriteria("A");
+    Criteria<Routes> c = new RouteFromCriteria("A");
     Assert.assertEquals(fromA, c.meetCriteria(input));
   }
 
   @Test
   public void testTo() {
-    RouteCriteria c = new ToCriteria("B");
+    Criteria<Routes> c = new RouteToCriteria("B");
     Assert.assertEquals(toB, c.meetCriteria(input));
   }
 
   @Test
   public void testFromAndTo() {
-    RouteCriteria c1 = new FromCriteria("A");
-    RouteCriteria c2 = new ToCriteria("B");
-    RouteCriteria c = new AndCriteria(c1, c2);
+    Criteria<Routes> c1 = new RouteFromCriteria("A");
+    Criteria<Routes> c2 = new RouteToCriteria("B");
+    Criteria<Routes> c = new AndCriteria<>(c1, c2);
     Assert.assertEquals(fromAAndToB, c.meetCriteria(input));
   }
 
   @Test
   public void testFromOrFrom() {
-    RouteCriteria c1 = new FromCriteria("A");
-    RouteCriteria c2 = new FromCriteria("B");
-    RouteCriteria c = new OrCriteria(c1, c2);
+    Criteria<Routes> c1 = new RouteFromCriteria("A");
+    Criteria<Routes> c2 = new RouteFromCriteria("B");
+    Criteria<Routes> c = new OrCriteria<>(c1, c2);
     Assert.assertEquals(fromAorB, c.meetCriteria(input));
   }
 

@@ -31,9 +31,9 @@ public class RoutesServiceImpl implements RoutesService {
 
   @Override
   public List<Routes> search(String from, String to, String sort, String order) {
-    RouteCriteria fromCriteria = new FromCriteria(from);
-    RouteCriteria toCriteria = new ToCriteria(to);
-    RouteCriteria andCriteria = new AndCriteria(fromCriteria, toCriteria);
+    Criteria<Routes> fromCriteria = new RouteFromCriteria(from);
+    Criteria<Routes> toCriteria = new RouteToCriteria(to);
+    Criteria<Routes> andCriteria = new AndCriteria<>(fromCriteria, toCriteria);
     List<Routes> res = andCriteria.meetCriteria(routesRepository.findAll());
     if (sort.equals("price") || sort.equals("duration")) {
       Comparator<Routes> comp = null;
