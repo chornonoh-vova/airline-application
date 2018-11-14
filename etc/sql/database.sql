@@ -12,7 +12,8 @@ create table flights (
     arrival_time time not null,
     cancellation_status boolean default false,
     route_id int not null,
-    pilot_id int not null
+    pilot_id int not null,
+    airplane_id int not null
 );
 
 create table tickets (
