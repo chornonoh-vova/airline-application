@@ -1,4 +1,4 @@
-FROM gradle:4.10.2
+FROM gradle:4.10.2-alpine
 
 USER root
 
