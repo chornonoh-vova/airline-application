@@ -21,7 +21,7 @@ services:
       - mysql_root_password
 
   api:
-    image: airline-api:0.0.1
+    image: airline-api:0.0.1-alpine
     depends_on:
       - database
     deploy:
