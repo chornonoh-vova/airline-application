@@ -17,7 +17,7 @@ public class FlightToCriteria implements Criteria<Flights> {
     if (to != null) {
       return flights
           .stream()
-          .filter(f -> f.getArrivalTime().compareToIgnoreCase(to) < 0)
+          .filter(f -> f.getArrivalTime().compareToIgnoreCase(to) <= 0)
           .collect(Collectors.toList());
     } else {
       return flights;

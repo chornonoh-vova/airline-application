@@ -16,10 +16,7 @@ public class TestJsendSerializer {
 
   @Test
   public void testJsendSuccessDataMessage() throws JsonProcessingException {
-    JsendData data =
-        new JsendData() {
-          public String message = "success message";
-        };
+    JsendData data = new Message("success message");
     JsendResponse res = new JsendResponse("success", data);
     String json = new ObjectMapper().writeValueAsString(res);
     Assert.assertEquals(
@@ -53,10 +50,7 @@ public class TestJsendSerializer {
 
   @Test
   public void testJsendFailWithMessage() throws JsonProcessingException {
-    JsendData data =
-        new JsendData() {
-          public String message = "fail message";
-        };
+    JsendData data = new Message("fail message");
     JsendResponse res = new JsendResponse("fail", data);
     String json = new ObjectMapper().writeValueAsString(res);
     Assert.assertEquals("{\"status\":\"fail\",\"data\":{\"message\":\"fail message\"}}", json);

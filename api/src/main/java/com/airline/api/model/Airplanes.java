@@ -14,7 +14,7 @@ public class Airplanes implements JsendData, Serializable {
   @Column(name = "airplane_id")
   private int airplaneId;
 
-  @OneToOne(mappedBy = "airplanes")
+  @OneToOne(mappedBy = "airplane")
   private Flights flight;
 
   @Column(name = "airplane_number")
