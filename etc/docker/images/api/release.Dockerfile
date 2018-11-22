@@ -6,6 +6,6 @@ COPY . /app
 
 WORKDIR /app
 
-RUN gradle bootJar --parallel --console=verbose
+RUN gradle build
 
 ENTRYPOINT ["java", "-jar", "/app/build/libs/airline-api-0.0.1.jar"]

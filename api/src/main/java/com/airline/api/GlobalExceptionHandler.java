@@ -15,7 +15,8 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(value = Exception.class)
   @ResponseBody
   public ResponseEntity<JsendResponse> defaultErrorHandler(Exception e) {
-    final String message = Optional.of(e.getMessage()).orElse(e.getClass().getSimpleName());
+    final String message = Optional.ofNullable(e.getMessage()).orElse(e.getClass().getSimpleName());
+    e.printStackTrace(System.err);
     return new ResponseEntity<>(new JsendResponse("error", message), HttpStatus.BAD_REQUEST);
   }
 }

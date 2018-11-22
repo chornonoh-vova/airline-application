@@ -55,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
   }
 
   @Override
-  public Users registrate(String email, String password) {
+  public Users register(String email, String password) {
     Users user = new Users();
     // TODO: add email format checking
     user.setEmail(email);
@@ -75,15 +75,15 @@ public class AuthServiceImpl implements AuthService {
       int userId, String firstName, String lastName, String address, String phoneNumber) {
     Optional<Users> user = usersRepository.findById(userId);
     if (user.isPresent()) {
+      Users u = user.get();
       Passengers passenger = new Passengers();
-      passenger.setUser(user.get());
       passenger.setFirstName(firstName);
       passenger.setLastName(lastName);
       passenger.setAddress(address);
       // TODO: add phone number checking
       passenger.setPhoneNumber(phoneNumber);
-      passengersRepository.save(passenger);
-      return passenger;
+      Passengers p = passengersRepository.saveAndFlush(passenger);
+      return p;
     }
     return null;
   }
