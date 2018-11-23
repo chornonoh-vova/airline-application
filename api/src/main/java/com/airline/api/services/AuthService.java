@@ -3,7 +3,6 @@ package com.airline.api.services;
 import com.airline.api.model.Passengers;
 import com.airline.api.model.Sessions;
 import com.airline.api.model.Users;
-import org.springframework.lang.Nullable;
 
 public interface AuthService {
   /**
@@ -13,7 +12,6 @@ public interface AuthService {
    * @param password users password(SHA-256)
    * @return created session or null, if email or password is bad
    */
-  @Nullable
   Sessions login(String email, String password);
 
   /**
@@ -31,7 +29,7 @@ public interface AuthService {
    * @param password users password(SHA-256)
    * @return result of operation
    */
-  Users registrate(String email, String password);
+  Users register(String email, String password);
 
   /**
    * Add passenger info for user
@@ -52,7 +50,6 @@ public interface AuthService {
    * @param sessionKey from authentication header
    * @return user, if found or null
    */
-  @Nullable
   Users getUserBySessionKey(String sessionKey);
 
   /**
