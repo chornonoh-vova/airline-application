@@ -37,14 +37,14 @@ create table passengers (
     first_name varchar(50),
     last_name varchar(50),
     address varchar(50),
-    phone_number varchar(25)
+    phone_number varchar(25),
+    user_id int not null
 );
 
 create table users (
     user_id int not null primary key auto_increment,
     email varchar(50) unique,
     password char(64),
-    passenger_id int,
     role varchar(10)
 );
 

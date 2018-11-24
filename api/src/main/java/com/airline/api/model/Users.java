@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name = "users")
 public class Users implements Serializable, JsendData {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_id")
   private int userId;
 
@@ -19,9 +20,8 @@ public class Users implements Serializable, JsendData {
   @Column(name = "password")
   private String password;
 
-  @OneToOne
-  @JoinColumn(name = "passenger_id")
-  private Passengers passengers;
+  @OneToOne(mappedBy = "user")
+  private Passengers passenger;
 
   @OneToMany(mappedBy = "users")
   private List<Sessions> sessions;
@@ -63,12 +63,12 @@ public class Users implements Serializable, JsendData {
     this.role = role;
   }
 
-  public Passengers getPassengers() {
-    return passengers;
+  public Passengers getPassenger() {
+    return passenger;
   }
 
-  public void setPassengers(Passengers passengers) {
-    this.passengers = passengers;
+  public void setPassenger(Passengers passenger) {
+    this.passenger = passenger;
   }
 
   public List<Sessions> getSessions() {

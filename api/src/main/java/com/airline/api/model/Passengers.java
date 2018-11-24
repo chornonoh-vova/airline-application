@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Table(name = "passengers")
 public class Passengers implements Serializable, JsendData {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "passenger_id")
   private int passengerId;
 
@@ -24,7 +25,8 @@ public class Passengers implements Serializable, JsendData {
   @Column(name = "phone_number")
   private String phoneNumber;
 
-  @OneToOne(mappedBy = "passengers")
+  @OneToOne()
+  @JoinColumn(name = "user_id")
   private Users user;
 
   public Passengers() {}

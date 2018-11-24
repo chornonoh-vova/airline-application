@@ -31,13 +31,13 @@ public class TicketsController {
     String sessionKey = HeaderUtils.getSessionKey(authorization);
     Users user = authService.getUserBySessionKey(sessionKey);
     if (user != null) {
-      if (user.getPassengers() == null) {
+      if (user.getPassenger() == null) {
         return new JsendResponse("fail", new Message("Add passenger info before"));
       }
       JsendData data =
           new JsendData() {
             public List<Tickets> tickets =
-                ticketsService.getAllTickets(user.getPassengers().getPassengerId());
+                ticketsService.getAllTickets(user.getPassenger().getPassengerId());
           };
       return new JsendResponse("success", data);
     } else {
@@ -52,11 +52,11 @@ public class TicketsController {
     String sessionKey = HeaderUtils.getSessionKey(authorization);
     Users user = authService.getUserBySessionKey(sessionKey);
     if (user != null) {
-      if (user.getPassengers() == null) {
+      if (user.getPassenger() == null) {
         return new JsendResponse("fail", new Message("Add passenger info before"));
       }
       return ticketsService
-          .getTicketById(user.getPassengers().getPassengerId(), ticketId)
+          .getTicketById(user.getPassenger().getPassengerId(), ticketId)
           .map(
               tickets ->
                   new JsendResponse(
@@ -77,10 +77,10 @@ public class TicketsController {
     String sessionKey = HeaderUtils.getSessionKey(authorization);
     Users user = authService.getUserBySessionKey(sessionKey);
     if (user != null) {
-      if (user.getPassengers() == null) {
+      if (user.getPassenger() == null) {
         return new JsendResponse("fail", new Message("Add passenger info before"));
       }
-      return new JsendResponse("success", ticketsService.buy(user.getPassengers().getPassengerId(), flightId, body.seat));
+      return new JsendResponse("success", ticketsService.buy(user.getPassenger().getPassengerId(), flightId, body.seat));
     } else {
       return new JsendResponse("fail", new Message("Wrong authorization"));
     }
