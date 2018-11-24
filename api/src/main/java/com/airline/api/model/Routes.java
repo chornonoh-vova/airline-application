@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -17,6 +14,7 @@ import java.io.Serializable;
 public class Routes implements Serializable, JsendData {
   @Id
   @Column(name = "route_id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int routeId;
 
   @Column(name = "departure_airport")

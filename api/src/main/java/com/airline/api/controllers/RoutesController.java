@@ -60,8 +60,7 @@ public class RoutesController {
       /*, @RequestHeader(name = "Authorization") String authorization*/ ) {
     // TODO: add admin authorization
     try {
-      body = routesService.add(body);
-      return new JsendResponse("success", new IdResponse(body.getRouteId()));
+      return new JsendResponse("success", new IdResponse(routesService.add(body).getRouteId()));
     } catch (Exception e) {
       return new JsendResponse("fail", new Message(e.getMessage()));
     }

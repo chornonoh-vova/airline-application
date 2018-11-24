@@ -39,28 +39,23 @@ public class RoutesServiceImpl implements RoutesService {
       Comparator<Routes> comp = null;
       switch (sort) {
         case "price":
-          switch (order) {
-            case "asc":
-              comp = RouteComparators.priceAsc;
-              break;
-            default:
-              comp = RouteComparators.priceDesc;
-              break;
-          }
+          comp = byOrder(order);
           break;
         case "duration":
-          switch (order) {
-            case "asc":
-              comp = RouteComparators.durationAsc;
-              break;
-            default:
-              comp = RouteComparators.durationDesc;
-              break;
-          }
+          comp = byOrder(order);
+          break;
       }
       res.sort(comp);
     }
     return res;
+  }
+
+  private Comparator<Routes> byOrder(String order) {
+    if (order.equals("asc")) {
+      return RouteComparators.durationAsc;
+    } else {
+      return RouteComparators.durationDesc;
+    }
   }
 
   @Override
