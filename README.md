@@ -6,4 +6,4 @@ Application for airline company
 ### Requirements
  - [Docker](https://docs.docker.com/install/) (v 18.06 or higher)
 
-In your console, run: `./bin/install` and airline application will be installed.
+In your console, run: `./bin/install.sh` and airline application will be installed.
