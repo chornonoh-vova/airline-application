@@ -14,7 +14,7 @@ public class Tickets implements Serializable, JsendData {
   @Id
   @Column(name = "ticket_id")
   private int ticketId;
-  @Column(name = "flightId")
+  @Column(name = "flight_id")
   private int flightId;
   @Column(name = "passenger_id")
   private int passengerId;
