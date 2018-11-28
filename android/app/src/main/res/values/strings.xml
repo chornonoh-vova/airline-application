@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Airline App</string>
+    <string name="home_action">Home</string>
+    <string name="tickets_action">My tickets</string>
+    <string name="profile_action">My profile</string>
+    <string name="logout_action">Log out</string>
 </resources>
