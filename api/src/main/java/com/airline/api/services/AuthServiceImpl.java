@@ -82,8 +82,9 @@ public class AuthServiceImpl implements AuthService {
       passenger.setAddress(address);
       // TODO: add phone number checking
       passenger.setPhoneNumber(phoneNumber);
-      Passengers p = passengersRepository.saveAndFlush(passenger);
-      return p;
+      passenger.setUser(u);
+      u.setPassenger(passenger);
+      return passengersRepository.saveAndFlush(passenger);
     }
     return null;
   }
