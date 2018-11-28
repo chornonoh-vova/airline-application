@@ -34,7 +34,7 @@ openssl rand -base64 20 | tr -d '\n' | init_secret mysql_root_password -
 docker volume create airline_database_data
 
 # building image for airline api
-if [[ $BULD_FLAG = '-d' ]]; then
+if [[ $BUILD_FLAG = '-d' ]]; then
     (cd ..; \
         docker build -t airline-api:0.0.1 api -f etc/docker/images/api/Dockerfile)
     # deploying application
