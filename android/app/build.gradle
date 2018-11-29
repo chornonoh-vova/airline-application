@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'org.jetbrains.dokka-android'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -29,6 +31,10 @@ android {
             buildConfigField 'String', "airlineApiAddress", airline_application_api_address
             resValue 'string', "airline_api_address", airline_application_api_address
         }
+    }
+    dokka {
+        outputFormat = 'gfm'
+        outputDirectory = "$buildDir/docs"
     }
 }
 

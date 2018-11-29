@@ -11,7 +11,7 @@ import javax.inject.Singleton
 @Component(modules = [NetModule::class])
 interface ViewModelInjector {
     /**
-     * Injector for {@link HomeViewModel}
+     * Injector for [HomeViewModel]
      */
     fun inject(homeViewModel: HomeViewModel)
 }

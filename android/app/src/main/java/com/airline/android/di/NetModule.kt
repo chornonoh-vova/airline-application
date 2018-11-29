@@ -42,7 +42,7 @@ class NetModule {
      * Provides configured Retrofit instance.
      * Adds a gson as converter.
      *
-     * @param httpClient configured {@link OkHttpClient} instance
+     * @param httpClient configured [OkHttpClient] instance
      *
      * @return retrofit instance
      */
@@ -57,7 +57,7 @@ class NetModule {
 
     /**
      * Airline API, that can be injected<br>
-     * Creates implementation from {@link AirlineApi}
+     * Creates implementation from [AirlineApi]
      * @param retrofit configured Retrofit instance
      *
      * @return airline api instance

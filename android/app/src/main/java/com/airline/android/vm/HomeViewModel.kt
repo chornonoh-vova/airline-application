@@ -4,7 +4,7 @@ import com.airline.android.net.AirlineApi
 import javax.inject.Inject
 
 /**
- * Subclass of {@link BaseViewModel} for home page
+ * Subclass of [BaseViewModel] for home page
  */
 class HomeViewModel : BaseViewModel() {
     @Inject

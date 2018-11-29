@@ -7,7 +7,7 @@ import com.airline.android.di.ViewModelInjector
 
 /**
  * Super class for other view models.<br>
- * Injects all dependencies via {@link ViewModelInjector}
+ * Injects all dependencies via [ViewModelInjector]
  */
 open class BaseViewModel : ViewModel() {
     /**
