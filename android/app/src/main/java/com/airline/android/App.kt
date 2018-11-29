@@ -65,4 +65,10 @@ class App : Application() {
      * @return user id or 0, if not found
      */
     fun loadUserId() = preferences.getInt(Const.PREFS_USER_ID_KEY, 0)
+
+    override fun onCreate() {
+        super.onCreate()
+
+        Const.credentials = this.loadCredentials()
+    }
 }

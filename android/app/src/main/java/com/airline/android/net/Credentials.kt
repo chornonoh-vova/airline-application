@@ -10,7 +10,7 @@ import java.io.Serializable
 data class Credentials(
     val authType: String,
     val sessionId: String
-): Serializable {
+) : Serializable {
     /**
      * Helper function to determine empty credentials
      */

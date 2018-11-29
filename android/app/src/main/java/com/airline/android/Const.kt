@@ -1,5 +1,7 @@
 package com.airline.android
 
+import com.airline.android.net.Credentials
+
 /**
  * Class for centralized storing of preference keys
  */
@@ -16,4 +18,6 @@ object Const {
     // credentials for API authorization
     const val PREFS_SESSION_ID_KEY = "SESSION_ID"
     const val PREFS_AUTH_TYPE = "Basic"
+
+    lateinit var credentials: Credentials
 }
