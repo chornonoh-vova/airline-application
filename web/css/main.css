@@ -1,0 +1,112 @@
+body{
+	margin: 0;
+}
+
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: white;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+}
+
+#nav-menu{
+	float: left;
+	font-size: 23px;
+	font-family: 'Lobster', cursive;
+}
+
+li a{
+	display: block;
+	color: #5f5050;
+	text-align: center;
+	text-decoration: none;
+	padding: 15px;
+	margin-left: 15px;
+	margin-top: 12px;
+}
+
+#logIn, #signIn{
+	float: right;
+	margin-right: 2%;
+	margin-top: 17px;
+}
+#signIn{
+	border: 2px solid lightblue;
+	border-radius: 10px;
+}
+
+#logo_img{
+    width: 170px;
+    height: 50px;
+    margin-top: -11px;
+}
+
+.container{
+	width: 100%;
+	height: 800px;
+    background-color: #2a589a;
+	background-image: url("../img/background.jpg");
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+
+.find-tickets{
+	background-color: white;
+    width: 1160px;
+    height: 155px;
+    opacity: 0.6;
+    margin: 17% 0 0 7%;
+    position: absolute;
+    border: 3px solid;
+    border-radius: 20px;
+}
+
+.field{
+width: 910px;
+    height: 80px;
+    /* background-color: black; */
+    margin-top: 41px;
+    margin-left: 31px;
+}
+
+.search-tickets{
+	border-radius: 5px;
+    float: right;
+    margin: -73px 27px 0 0;
+    width: 181px;
+    height: 65px;
+    color: #150f0a;
+    background-color: #5df14b;
+    border: none;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+}
+
+#search-btn{
+	color: white
+	font-size: 20px;
+}
+
+.air-from, .air-where, .date-from, .date-back{
+	display: inline-block;
+    width: 215px;
+    height: 57px;
+    background-color: #ffffff;
+    margin-left: 3px;
+    margin-top: 8px;
+    opacity: 1 !important;
+    border: 3px solid black;
+    border-radius: 6px;
+}
+
+/*ФУтер*/
+.bottom{
+	width: 100%;
+	height: 220px;
+	background-color: blue;
+}
