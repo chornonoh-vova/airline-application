@@ -4,4 +4,8 @@
     <string name="tickets_action">My tickets</string>
     <string name="profile_action">My profile</string>
     <string name="logout_action">Log out</string>
+    <string name="home_header_text">Welcome to airline application!</string>
+    <string name="home_subtitle_text">Here are some links to get you started:</string>
+    <string name="routes_action">Routes</string>
+    <string name="flights_action">Flights</string>
 </resources>

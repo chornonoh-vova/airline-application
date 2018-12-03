@@ -7,15 +7,18 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.airline.android.R
+import com.airline.android.ui.fragments.HomeFragment
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Class, responsible for main page
  *
  * @see R.layout.activity_main - xml layout of page
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CallbackActivity {
     private val mToolbar by lazy {
         findViewById<Toolbar>(R.id.main_activity_toolbar)
     }
@@ -36,12 +39,21 @@ class MainActivity : AppCompatActivity() {
 
         // setup navigation view
         mNavigationView.setNavigationItemSelectedListener {
+            if (it.itemId == R.id.logout_action) {
+                return@setNavigationItemSelectedListener false
+            }
+
             it.isChecked = true
             mDrawerLayout.closeDrawers()
 
             mToolbar.title = it.title
 
-            // TODO: add fragment swapping here
+            val fragment = when(it.itemId) {
+                R.id.home_action -> HomeFragment()
+                else -> Fragment()
+            }
+
+            showFragment(fragment)
 
             true
         }
@@ -56,6 +68,9 @@ class MainActivity : AppCompatActivity() {
 
         // setting home action checked by default
         mNavigationView.setCheckedItem(R.id.home_action)
+
+        // setting home fragment activated by default
+        showHomeFragment()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -67,4 +82,16 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun showHomeFragment() = showFragment(HomeFragment())
+
+    private fun showFragment(fragment: Fragment) {
+        with(supportFragmentManager.beginTransaction()) {
+            this.replace(R.id.main_content_container, fragment)
+            this.commit()
+        }
+    }
+
+    override fun showSnackbar(message: String) =
+        Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show()
 }

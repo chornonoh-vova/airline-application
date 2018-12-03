@@ -1,5 +1,6 @@
 package com.airline.android.di
 
+import com.airline.android.BuildConfig
 import com.airline.android.net.AirlineApi
 import com.airline.android.net.AuthenticationInterceptor
 import dagger.Module
@@ -14,7 +15,7 @@ import javax.inject.Singleton
  */
 @Module
 class NetModule {
-    private val mBaseUrl = "http://api.airline.com:8080"
+    private val mBaseUrl = "http://${BuildConfig.airlineApiAddress}:8080"
 
     /**
      * Simple provider for authentication interceptor
