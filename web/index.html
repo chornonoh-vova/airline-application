@@ -12,17 +12,62 @@
 		<li><a href="" id="nav-menu" style="margin-left: 5%;">Скидки</a></li>
 		<li><a href="" id="nav-menu">Про нас</a></li>
 		<li><a href="" id="nav-menu">Контакты</a></li>
-		<li><a href="" id="signIn">Регистрация</a></li>
-		<li><a href="" id="logIn">Вход</a></li>
+		<li><a href="#" id="signIn">Регистрация</a></li>
+		<li><a href="#" id="logIn">Вход</a></li>
 	</ul>
+
+	<div id="regModal" class="reg-modal">
+		<div class="reg-modal-content">
+			<form action="">
+				<div class="reg-content">
+					<p class="h1Modal">Регистрация</p>
+			    		<hr>
+			    			<label class="lab-data" for="email">Электронная почта</label>
+			    			<input class="inp-data" type="text" placeholder="Ваш email" name="email" required>
+			    			<label class="lab-data" for="pass">Пароль</label>
+			    			<input class="inp-data" type="password" placeholder="Введите пароль" name="password" required>
+			    			<label class="lab-data" for="pass-repeat">Повторите пароль</label>
+			    			<input class="inp-data" type="password" placeholder="Повторите пароль" name="password-repeat" required>
+			    		<hr>
+			    	<button class="reg-btn" type="submit">Зарегистрироваться</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="logModal" class="log-modal">
+		<div class="log-modal-content">
+			<form action="">
+				<div class="log-content">
+					<p class="h1Modal">Авторизация</p>
+			    		<hr>
+			    			<label class="lab-data" for="email">Электронная почта</label>
+			    			<input class="inp-data" type="text" placeholder="Ваш email" name="email" required>
+			    			<label class="lab-data" for="pass">Пароль</label>
+			    			<input class="inp-data" type="password" placeholder="Введите пароль" name="password" required>
+			    		<hr>
+			    	<button class="reg-btn" type="submit">Вход</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="js/funcbtn.js"></script>
 
 	<div class="container">
 		<div class="find-tickets">
 			<div class="field">
-				<div class="air-from"></div>
-				<div class="air-where"></div>
-				<div class="date-from"></div>
-				<div class="date-back"></div>
+				<div class="air-from">
+					<input type="text" class="inp-from" placeholder="From...">
+				</div>
+				<div class="air-where">
+					<input type="text" class="inp-where" placeholder="Where...">
+				</div>
+				<div class="date-from">
+					<input type="text" class="inp-date" placeholder="When">
+				</div>
+				<div class="count">
+					<input type="text" class="inp-count" placeholder="Count">
+				</div>
 			</div>
 			<button class="search-tickets"><span id="search-btn">Найти</span></button>
 		</div>
@@ -31,6 +76,6 @@
 	<div class="bottom">
 		
 	</div>
-
+	
 </body>
 </html>
