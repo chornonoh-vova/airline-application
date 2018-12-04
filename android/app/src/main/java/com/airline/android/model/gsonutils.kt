@@ -52,15 +52,9 @@ class JsendDeserializer : JsonDeserializer<JsendResponse> {
         when (status) {
             "success" -> {
                 val data = jsendObject.get("data")
-                if (data.isJsonArray) {
-                    val e = data.asJsonArray[0]
-                    if (e.isJsonObject) {
-                        if (e.asJsonObject.has("routeId")) {
-                            result.listData = gson.fromJson(data, listRoutesType)
-                        }
-                    } else {
-                        result.listData = emptyList()
-                    }
+                if (data.asJsonObject.has("routes")) {
+                    val e = data.asJsonObject.get("routes").asJsonArray
+                    result.listData = gson.fromJson(e, listRoutesType)
                 } else {
                     if (data.asJsonObject.has("routeId")) {
                         result.data = gson.fromJson(data.asJsonObject, Route::class.java)

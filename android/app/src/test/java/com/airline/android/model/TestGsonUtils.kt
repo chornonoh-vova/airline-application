@@ -31,15 +31,17 @@ class TestGsonUtils {
         val json = """
         {
           "status": "success",
-          "data": [
-            {
-              "routeId": 0,
-              "departureAirport": "Kyiv Boryspil International Airport",
-              "destinationAirport": "Antwerp Airport",
-              "price": 500,
-              "duration": "05:30:00"
-            }
-          ]
+          "data": {
+            "routes": [
+              {
+                "routeId": 0,
+                "departureAirport": "Kyiv Boryspil International Airport",
+                "destinationAirport": "Antwerp Airport",
+                "price": 500,
+                "duration": "05:30:00"
+              }
+            ]
+          }
         }
         """.trimIndent()
         val obj = gson.fromJson(json, JsendResponse::class.java)

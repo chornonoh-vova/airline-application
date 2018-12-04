@@ -8,4 +8,26 @@
     <string name="home_subtitle_text">Here are some links to get you started:</string>
     <string name="routes_action">Routes</string>
     <string name="flights_action">Flights</string>
+    <string name="to_input_hint">To…</string>
+    <string name="search_description">Search action</string>
+    <string name="fromInput_hint">From…</string>
+    <string name="from_input_hint">From…</string>
+
+    <string name="routes_sort_by_prompt">Choose category</string>
+
+    <string name="sort_order_prompt">Choose order</string>
+    <string name="expand_collapse_button_description">Expand or collapse button</string>
+
+    <!-- For routes spinner -->
+    <string-array name="routes_sort_by">
+        <item>None</item>
+        <item>Price</item>
+        <item>Duration</item>
+    </string-array>
+
+    <!-- Sorting order for spinners -->
+    <string-array name="sort_order">
+        <item>Descending</item>
+        <item>Ascending</item>
+    </string-array>
 </resources>
