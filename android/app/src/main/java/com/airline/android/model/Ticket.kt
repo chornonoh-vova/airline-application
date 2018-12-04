@@ -10,4 +10,4 @@ data class Ticket(
     val flightId: Int,
     val passengerId: Int,
     val seat: String
-) : Serializable
+) : Serializable, Data

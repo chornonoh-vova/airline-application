@@ -13,4 +13,4 @@ data class Flight(
     val routeId: Int,
     val pilotId: Int,
     val airplaneId: Int
-) : Serializable
+) : Serializable, Data

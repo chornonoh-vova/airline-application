@@ -11,4 +11,4 @@ data class Route(
     val destinationAirport: String,
     val price: Double,
     val duration: String
-) : Serializable
+) : Serializable, Data

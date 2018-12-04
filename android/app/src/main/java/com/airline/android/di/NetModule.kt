@@ -1,8 +1,12 @@
 package com.airline.android.di
 
 import com.airline.android.BuildConfig
+import com.airline.android.model.JsendDeserializer
+import com.airline.android.model.JsendResponse
 import com.airline.android.net.AirlineApi
 import com.airline.android.net.AuthenticationInterceptor
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -40,18 +44,33 @@ class NetModule {
             .build()
 
     /**
+     * Provides configured Gson instance.
+     * Adds custom type adapter to gson.
+     *
+     * @return gson instance
+     */
+    @Provides
+    @Singleton
+    fun provideGson(): Gson =
+        GsonBuilder()
+            .registerTypeAdapter(JsendResponse::class.java, JsendDeserializer())
+            .create()
+
+    /**
      * Provides configured Retrofit instance.
      * Adds a gson as converter.
      *
+     * @param gson configured [Gson] instance with type adapters:
+     * - [JsendDeserializer] used to convert [JsendResponse]
      * @param httpClient configured [OkHttpClient] instance
      *
      * @return retrofit instance
      */
     @Provides
     @Singleton
-    fun provideRetrofit(httpClient: OkHttpClient): Retrofit =
+    fun provideRetrofit(gson: Gson, httpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(httpClient)
             .baseUrl(mBaseUrl)
             .build()
