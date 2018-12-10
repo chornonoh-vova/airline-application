@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.airline.android.R
+import com.airline.android.ui.fragments.FlightsFragment
 import com.airline.android.ui.fragments.HomeFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
             mToolbar.title = it.title
 
             val fragment = when(it.itemId) {
+                R.id.flights_action -> FlightsFragment()
                 R.id.home_action -> HomeFragment()
                 else -> Fragment()
             }
@@ -84,6 +86,8 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
     }
 
     private fun showHomeFragment() = showFragment(HomeFragment())
+
+    fun showFlightsFragment() = showFragment(FlightsFragment())
 
     private fun showFragment(fragment: Fragment) {
         with(supportFragmentManager.beginTransaction()) {
