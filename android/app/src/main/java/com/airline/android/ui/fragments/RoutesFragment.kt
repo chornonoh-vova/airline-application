@@ -92,7 +92,14 @@ class RoutesFragment: Fragment() {
             mainActivity.showSnackbar("To field is empty")
             return@OnClickListener
         }
-        mainActivity.showSnackbar("Search clicked")
+
+        var fromAirport: String? = fromField.text.toString().trim()
+        if (fromAirport.isNullOrBlank()) fromAirport = null
+
+        val sort = sortBySpinner.selectedItem.toString().toLowerCase()
+        val order = orderSpinner.selectedItem.toString().toLowerCase()
+
+        routesViewModel.searchRoutes(fromAirport, toAirport, sort, order)
     }
 
     private val errorCallback: (message: String?) -> Unit = {

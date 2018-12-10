@@ -11,8 +11,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class RoutesViewModel: BaseViewModel() {
-    @Inject lateinit var api: AirlineApi
+class RoutesViewModel : BaseViewModel() {
+    @Inject
+    lateinit var api: AirlineApi
 
     private lateinit var routes: MutableLiveData<List<Route>>
 
@@ -46,5 +47,32 @@ class RoutesViewModel: BaseViewModel() {
             }
         }
         api.getRoutes().enqueue(callback)
+    }
+
+    fun searchRoutes(
+        from: String?,
+        to: String,
+        sort: String?,
+        order: String?
+    ) {
+        val callback = object : Callback<JsendResponse> {
+            override fun onFailure(call: Call<JsendResponse>, t: Throwable) {
+                errorCallback("Network error ${t.message}")
+            }
+
+            override fun onResponse(call: Call<JsendResponse>, response: Response<JsendResponse>) {
+                val body = response.body()
+                if (body?.status == "success") {
+                    routes.value = body.listData as List<Route>?
+                } else {
+                    if (body?.data != null) {
+                        errorCallback((body.data as JsendFail).message)
+                    } else {
+                        errorCallback(body?.message)
+                    }
+                }
+            }
+        }
+        api.searchRoutes(from, to, sort ?: "none", order ?: "desc").enqueue(callback)
     }
 }
