@@ -35,13 +35,11 @@ docker volume create airline_database_data
 
 # building image for airline api
 if [[ $BUILD_FLAG = '-d' ]]; then
-    (cd ..; \
-        docker build -t airline-api:0.0.1 api -f etc/docker/images/api/Dockerfile)
+    ( cd ../api; docker build -t airline-api:0.0.1 -f ../etc/docker/images/api/Dockerfile . )
     # deploying application
     docker stack deploy -c ../etc/docker/stack/docker-compose.yml airline
 else
-    (cd ..; \
-        docker build -t airline-api:0.0.1-alpine api -f etc/docker/images/api/release.Dockerfile)
+    ( cd ../api; docker build -t airline-api:0.0.1-alpine -f ../etc/docker/images/api/release.Dockerfile . )
     # deploying application
     docker stack deploy -c ../etc/docker/stack/release.docker-compose.yml airline
 fi
