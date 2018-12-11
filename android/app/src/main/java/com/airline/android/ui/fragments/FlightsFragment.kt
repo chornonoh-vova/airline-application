@@ -58,7 +58,7 @@ class FlightsFragment: Fragment() {
         departureField = view.findViewById(R.id.from_field)
         search = view.findViewById(R.id.search)
         search.setOnClickListener(searchClickListener)
-        flightsList = view.findViewById(R.id.routes_list)
+        flightsList = view.findViewById(R.id.flights_list)
         flightsViewModel = ViewModelProviders.of(this).get(FlightsViewModel::class.java)
         flightsViewModel.errorCallback = errorCallback
         flightsAdapter = FlightsAdapter(emptyList())

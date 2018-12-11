@@ -23,7 +23,7 @@ class FlightsAdapter(dataset: List<Flight>) : RecyclerView.Adapter<FlightsAdapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.departure.text = dataset[position].departureTime
         holder.arrival.text = dataset[position].arrivalTime
-        holder.status.text = dataset[position].cancellationStatus.toString()
+        holder.status.text = "Cancelled: " + dataset[position].cancellationStatus.toString()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

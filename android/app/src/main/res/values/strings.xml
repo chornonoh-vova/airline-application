@@ -14,6 +14,7 @@
     <string name="from_input_hint">From…</string>
 
     <string name="routes_sort_by_prompt">Choose category</string>
+    <string name="flights_sort_by_prompt">Choose category</string>
 
     <string name="sort_order_prompt">Choose order</string>
     <string name="expand_collapse_button_description">Expand or collapse button</string>
@@ -23,6 +24,13 @@
         <item>None</item>
         <item>Price</item>
         <item>Duration</item>
+    </string-array>
+
+    <!-- For flights spinner -->
+    <string-array name="flights_sort_by">
+        <item>None</item>
+        <item>To</item>
+        <item>From</item>
     </string-array>
 
     <!-- Sorting order for spinners -->
