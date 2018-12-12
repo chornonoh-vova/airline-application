@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/about.css">
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<title>Airlines</title>
+</head>
+<body>
+	<ul>
+		<li><a href="index.html" id="nav-menu" style="margin-left: 5%;"><img id="logo_img" src="img/web_hi_res_round.png" alt="LOGO"></a></li>
+		<li><a href="contacts.html" id="nav-menu" style="margin-left: 5%;">Контакты</a></li>
+		<li><a href="about.html" id="nav-menu">Про нас</a></li>
+		<li><a href="#" id="signIn">Регистрация</a></li>
+		<li><a href="#" id="logIn">Вход</a></li>
+	</ul>
+
+	<div id="regModal" class="reg-modal">
+		<div class="reg-modal-content">
+			<form action="">
+				<div class="reg-content">
+					<p class="h1Modal">Регистрация</p>
+			    		<hr>
+			    			<label class="lab-data" for="email">Электронная почта</label>
+			    			<input class="inp-data" type="text" placeholder="Ваш email" name="email" required>
+			    			<label class="lab-data" for="pass">Пароль</label>
+			    			<input class="inp-data" type="password" placeholder="Введите пароль" name="password" required>
+			    			<label class="lab-data" for="pass-repeat">Повторите пароль</label>
+			    			<input class="inp-data" type="password" placeholder="Повторите пароль" name="password-repeat" required>
+			    		<hr>
+			    	<button class="reg-btn" type="submit">Зарегистрироваться</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="logModal" class="log-modal">
+		<div class="log-modal-content">
+			<form action="">
+				<div class="log-content">
+					<p class="h1Modal">Авторизация</p>
+			    		<hr>
+			    			<label class="lab-data" for="email">Электронная почта</label>
+			    			<input class="inp-data" type="text" placeholder="Ваш email" name="email" required>
+			    			<label class="lab-data" for="pass">Пароль</label>
+			    			<input class="inp-data" type="password" placeholder="Введите пароль" name="password" required>
+			    		<hr>
+			    	<button class="reg-btn" type="submit">Вход</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="js/userbtn.js"></script>
+
+	<div class="about-us">
+		<div class="text-field">
+			<h2>Это курсовая работа студентов 4-го курса</h2>
+			<div class="text-about-us">
+				При выполнении данной курсовой работы, мы разделили основные обязанности среди всех участников нашей бригады. При этом обоюдно помогали друг другу. <br><br>
+				ТУТ ЕЩЕ БУДЕТ КАКОЙ ТО ТЕКСТ. ПРИДУМАЕМ ПОЗЖЕ :-)
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

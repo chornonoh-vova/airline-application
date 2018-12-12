@@ -2,6 +2,7 @@ package com.airline.android.di
 
 import com.airline.android.vm.FlightsViewModel
 import com.airline.android.vm.HomeViewModel
+import com.airline.android.vm.RoutesViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -19,4 +20,8 @@ interface ViewModelInjector {
      * Injector for [HomeViewModel]
      */
     fun inject(homeViewModel: HomeViewModel)
+    /**
+     * Injector for [RoutesViewModel]
+     */
+    fun inject(routesViewModel: RoutesViewModel)
 }

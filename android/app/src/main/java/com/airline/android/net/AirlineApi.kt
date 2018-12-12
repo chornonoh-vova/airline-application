@@ -23,4 +23,12 @@ interface AirlineApi {
         @Query("sort") sort: String = "none",
         @Query("order") order: String = "desc"
     ): Call<JsendResponse>
+
+    @GET("/search/routes")
+    fun searchRoutes(
+        @Query("from") from: String?,
+        @Query("to") to: String,
+        @Query("sort") sort: String = "none",
+        @Query("order") order: String = "desc"
+    ): Call<JsendResponse>
 }

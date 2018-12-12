@@ -29,6 +29,7 @@ open class BaseViewModel : ViewModel() {
         when (this) {
             // smart type case
             is FlightsViewModel -> injector.inject(this)
+            is RoutesViewModel -> injector.inject(this)
             is HomeViewModel -> injector.inject(this)
         }
     }
