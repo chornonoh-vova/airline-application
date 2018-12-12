@@ -4,9 +4,9 @@
 
 set -e
 
-BUILD_FLAG=${1:--d}
+version='0.0.1'
 
-echo $BUILD_FLAG
+BUILD_FLAG=${1:--d}
 
 SCRIPT_PATH=`dirname $0`
 pushd $SCRIPT_PATH > /dev/null
@@ -33,15 +33,22 @@ openssl rand -base64 20 | tr -d '\n' | init_secret mysql_root_password -
 # creating volume
 docker volume create airline_database_data
 
+suffix=''
+prefix=''
+
 # building image for airline api
-if [[ $BUILD_FLAG = '-d' ]]; then
-    ( cd ../api; docker build -t airline-api:0.0.1 -f ../etc/docker/images/api/Dockerfile . )
-    # deploying application
-    docker stack deploy -c ../etc/docker/stack/docker-compose.yml airline
-else
-    ( cd ../api; docker build -t airline-api:0.0.1-alpine -f ../etc/docker/images/api/release.Dockerfile . )
-    # deploying application
-    docker stack deploy -c ../etc/docker/stack/release.docker-compose.yml airline
+if [[ $BUILD_FLAG != '-d' ]]; then
+    suffix='-alpine'
+    prefix='release.'
 fi
+
+# building images
+# api
+( cd ../api; docker build -t airline-api:${version}${suffix} -f ../etc/docker/images/api/${prefix}Dockerfile . )
+# web
+( cd ../web; docker build -t airline-web:${version}${suffix} -f ../etc/docker/images/web/${prefix}Dockerfile . )
+
+# deploying application
+docker stack deploy -c ../etc/docker/stack/${prefix}docker-compose.yml airline
 
 popd > /dev/null

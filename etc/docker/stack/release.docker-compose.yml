@@ -6,6 +6,8 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+      placement:
+        constraints: [node.role == manager]
     ports:
       - "3306:3306"
     volumes:
@@ -38,6 +40,17 @@ services:
       MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
     secrets:
       - mysql_password
+
+  web:
+    image: airline-web:0.0.1-alpine
+    depends_on:
+      - api
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
 
   visualizer:
     image: dockersamples/visualizer:stable
