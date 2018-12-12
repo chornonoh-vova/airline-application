@@ -1,0 +1,45 @@
+.contact-us{
+	background-image: url(../img/contacts_bg.jpg);
+	-webkit-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	height: 650px;
+}
+
+.social-link{
+	width: 1140px;
+    height: 400px;
+    /*background-color: red;*/
+    margin: 70px 0 0 105px;
+    position: absolute;
+}
+
+.cols{
+	display: inline-block;
+}
+
+.telegram{
+    background-color: lightblue;
+    width: 320px;
+    height: 300px;
+	flex-direction: column;
+    margin-left: 43px;
+    margin-top: 17px;
+    border-radius: 15px;
+}
+
+.tel-desc{
+	background-color: white;
+	opacity: 0.8;
+    width: 320px;
+    height: 120px;
+    margin-left: 43px;
+    margin-top: 40px;
+    border-radius: 3px;
+    border: 1px solid grey;
+}
+
+.contacts-img{
+	width: 320px;
+	height: 300px;
+}

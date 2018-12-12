@@ -1,0 +1,217 @@
+body{
+	margin: 0;
+}
+
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: white;
+	/*position: fixed;*/
+	top: 0;
+	width: 100%;
+	/*z-index: 999;*/
+}
+
+#nav-menu{
+	float: left;
+	font-size: 27px;
+	font-family: 'Lobster', cursive;
+}
+
+li a{
+	display: block;
+	color: #5f5050;
+	text-align: center;
+	text-decoration: none;
+	padding: 15px;
+	margin-left: 15px;
+	margin-top: 12px;
+}
+
+#logIn, #signIn{
+	float: right;
+	margin-right: 2%;
+	margin-top: 17px;
+}
+#signIn{
+	border: 2px solid lightblue;
+	border-radius: 10px;
+}
+
+#logo_img{
+	width: 80px;
+    height: 80px;
+    margin: 0;
+    padding-top: 20px;
+    margin-top: -41px;
+    margin-bottom: -13px;
+}
+
+.container{
+	width: 100%;
+	height: 800px;
+    background-color: #2a589a;
+	background-image: url("../img/background.jpg");
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+
+.find-tickets{
+	background-color: white;
+    width: 1160px;
+    height: 155px;
+    opacity: 0.6;
+    margin: 17% 0 0 7%;
+    position: absolute;
+    border: 3px solid;
+    border-radius: 20px;
+}
+
+.field{
+width: 910px;
+    height: 80px;
+    /* background-color: black; */
+    margin-top: 41px;
+    margin-left: 31px;
+}
+
+.search-tickets{
+	border-radius: 5px;
+    float: right;
+    margin: -73px 27px 0 0;
+    width: 181px;
+    height: 65px;
+    color: #150f0a;
+    background-color: #5df14b;
+    border: none;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+}
+
+#search-btn{
+	color: white
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.air-from, .air-where, .date-from, .count{
+	display: inline-block;
+    width: 215px;
+    height: 57px;
+    background-color: #ffffff;
+    margin-left: 3px;
+    margin-top: 8px;
+    opacity: 1 !important;
+    border: 2px solid black;
+    border-radius: 6px;
+}
+::-webkit-inner-spin-button{display: none;}
+
+.inp-date{
+	height: 55px !important;
+}
+
+.inp-from, .inp-where, .inp-date, .inp-count{
+    width: 200px;
+    height: 53px;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding-left: 13px;
+    font-family: 'Monospace', cursive;
+}
+
+input{
+	font-size: 18px;
+}
+
+/* The Modal (background) */
+.reg-modal, .log-modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 640px;
+    overflow: hidden;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.reg-modal-content{
+    background-color: #fefefe;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #888;
+    width: 550px;
+    height: 560px;
+    border-radius: 15px;
+    box-shadow: -5px 5px 20px rgba(0,0,0,0.5);
+}
+
+.log-modal-content{
+	background-color: #fefefe;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #888;
+    width: 470px;
+    height: 455px;
+    border-radius: 15px;
+    box-shadow: -5px 5px 20px rgba(0,0,0,0.5);
+}
+
+.reg-btn, .log-btn{
+	text-align: center;
+    background-color: #3d403d;
+    color: white;
+    width: 100%;
+    height: 50px;
+    border: none;
+    padding: 0px;
+    margin-top: 20px;
+    font-size: 29px;
+    font-family: 'Lobster', cursive;
+    border-radius: 20px;
+}
+
+.reg-content, .log-content{
+	padding: 0px 15px 15px 15px;
+}
+
+.inp-data{
+	width: 94%;
+	padding: 15px;
+	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+	margin: 8px 0 25px 0;
+	font-size: 15px;
+	font-style: italic;
+}
+
+.inp-data:focus{
+	background-color: #ddd;
+	outline: none;
+}
+
+.lab-data{
+	font-size: 20px;
+	font-family: 'Lobster', cursive;
+}
+
+.h1Modal{
+	font-size: 40px;
+    color: #4a4a4a;
+    font-family: 'Lobster', cursive;
+}
+
+/*ФУтер*/
+.bottom{
+	width: 100%;
+	height: 220px;
+	background-color: blue;
+}
