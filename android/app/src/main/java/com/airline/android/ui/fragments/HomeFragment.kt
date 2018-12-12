@@ -28,8 +28,7 @@ class HomeFragment: Fragment() {
         val mainActivity = activity as MainActivity
 
         routesLink.setOnClickListener {
-            // TODO: actually switch to routes fragment
-            mainActivity.showSnackbar("Switching to routes fragment")
+            mainActivity.showRoutesFragment()
         }
 
         flightsLink.setOnClickListener {

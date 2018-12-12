@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.airline.android.R
 import com.airline.android.ui.fragments.HomeFragment
+import com.airline.android.ui.fragments.RoutesFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
 
             val fragment = when(it.itemId) {
                 R.id.home_action -> HomeFragment()
+                R.id.routes_action -> RoutesFragment()
                 else -> Fragment()
             }
 
@@ -84,6 +86,8 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
     }
 
     private fun showHomeFragment() = showFragment(HomeFragment())
+
+    fun showRoutesFragment() = showFragment(RoutesFragment())
 
     private fun showFragment(fragment: Fragment) {
         with(supportFragmentManager.beginTransaction()) {
