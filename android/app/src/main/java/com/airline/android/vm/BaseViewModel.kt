@@ -27,9 +27,10 @@ open class BaseViewModel : ViewModel() {
      */
     private fun inject() {
         when (this) {
-            // smart type case
+            // smart type cast
             is FlightsViewModel -> injector.inject(this)
             is RoutesViewModel -> injector.inject(this)
+            is SignUpViewModel -> injector.inject(this)
             is HomeViewModel -> injector.inject(this)
         }
     }

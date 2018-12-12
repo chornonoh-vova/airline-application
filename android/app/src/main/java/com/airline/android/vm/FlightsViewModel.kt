@@ -11,6 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
+@Suppress("UNCHECKED_CAST")
 class FlightsViewModel: BaseViewModel() {
     @Inject
     lateinit var api: AirlineApi

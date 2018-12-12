@@ -1,6 +1,7 @@
 package com.airline.api.controllers;
 
 import com.airline.api.model.Passengers;
+import com.airline.api.model.Users;
 import com.airline.api.model.Sessions;
 import com.airline.api.services.AuthService;
 import com.airline.api.utils.JsendData;
@@ -35,6 +36,7 @@ public class UsersController {
               "success",
               new JsendData() {
                 public String sessionKey = session.getSessionKey();
+                public int userId = session.getUsers().getUserId();
               });
     }
     return resp;
@@ -55,8 +57,10 @@ public class UsersController {
   public JsendResponse register(@RequestBody LoginRequest body) {
     JsendResponse resp;
     try {
-      authService.register(body.email, body.password);
-      resp = new JsendResponse("success", new Message("User registered"));
+      Users u = authService.register(body.email, body.password);
+      resp = new JsendResponse("success", new JsendData() {
+          public int userId = u.getUserId();
+        });
     } catch (Exception e) {
       resp = new JsendResponse("fail", new Message(e.getMessage()));
     }

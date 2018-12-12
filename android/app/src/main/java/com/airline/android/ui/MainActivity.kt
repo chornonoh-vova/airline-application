@@ -8,6 +8,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.airline.android.App
 import com.airline.android.R
 import com.airline.android.ui.fragments.FlightsFragment
 import com.airline.android.ui.fragments.HomeFragment
@@ -38,6 +39,8 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val id = (application as App).loadUserId()
 
         // setup navigation view
         mNavigationView.setNavigationItemSelectedListener {

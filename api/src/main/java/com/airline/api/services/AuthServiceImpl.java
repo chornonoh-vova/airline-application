@@ -66,8 +66,7 @@ public class AuthServiceImpl implements AuthService {
     } catch (JsonProcessingException e) {
       e.printStackTrace();
     }
-    usersRepository.save(user);
-    return user;
+    return usersRepository.save(user);
   }
 
   @Override

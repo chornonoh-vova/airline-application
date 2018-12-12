@@ -1,9 +1,10 @@
 package com.airline.android.net
 
+import com.airline.android.AddPassengerRequest
+import com.airline.android.LoginRequest
 import com.airline.android.model.JsendResponse
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * REST API interface
@@ -30,5 +31,17 @@ interface AirlineApi {
         @Query("to") to: String,
         @Query("sort") sort: String = "none",
         @Query("order") order: String = "desc"
+    ): Call<JsendResponse>
+
+    @POST("/login")
+    fun login(@Body loginRequest: LoginRequest): Call<JsendResponse>
+
+    @POST("/register")
+    fun register(@Body signUpRequest: LoginRequest): Call<JsendResponse>
+
+    @POST("/users/{userId}/passengerInfo")
+    fun addPassengerInfo(
+        @Path("userId") userId: Int,
+        @Body addPassengerRequest: AddPassengerRequest
     ): Call<JsendResponse>
 }

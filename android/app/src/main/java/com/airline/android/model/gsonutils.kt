@@ -24,6 +24,18 @@ data class JsendResponse(
 )
 
 /**
+ * Helper class, represents login response
+ */
+data class LoginResponse(
+    val sessionKey: String,
+    val userId: Int
+): Data
+
+data class UserIdResponse(
+    val userId: Int
+): Data
+
+/**
  * Helper class, represents fail data
  */
 data class JsendFail(var message: String) : Data
@@ -60,10 +72,11 @@ class JsendDeserializer : JsonDeserializer<JsendResponse> {
                     val e = data.asJsonObject.get("flights").asJsonArray
                     result.listData = gson.fromJson(e, listFLightsType)
                 } else {
-                    if (data.asJsonObject.has("routeId")) {
-                        result.data = gson.fromJson(data.asJsonObject, Route::class.java)
-                    } else if (data.asJsonObject.has("flightId")) {
-                        result.data = gson.fromJson(data.asJsonObject, Flight::class.java)
+                    when {
+                        data.asJsonObject.has("routeId") -> result.data = gson.fromJson(data.asJsonObject, Route::class.java)
+                        data.asJsonObject.has("flightId") -> result.data = gson.fromJson(data.asJsonObject, Flight::class.java)
+                        data.asJsonObject.has("sessionKey") -> result.data = gson.fromJson(data.asJsonObject, LoginResponse::class.java)
+                        data.asJsonObject.has("userId") -> result.data = gson.fromJson(data.asJsonObject, UserIdResponse::class.java)
                     }
                 }
             }
