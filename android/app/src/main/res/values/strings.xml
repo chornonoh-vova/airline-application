@@ -33,6 +33,9 @@
     <string name="address_text">Address</string>
     <string name="phone_number_text">Phone number</string>
     <string name="complete_button_text">Complete</string>
+    <string name="flight_number_text">Flight number: %1$d</string>
+    <string name="flight_status_text">Cancelled: %1$s</string>
+    <string name="ticket_seat_number_text">Your seat: %1$s</string>
 
     <!-- For routes spinner -->
     <string-array name="routes_sort_by">

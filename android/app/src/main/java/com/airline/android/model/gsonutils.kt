@@ -12,6 +12,7 @@ import java.lang.reflect.Type
  */
 val listRoutesType: Type = object : TypeToken<List<Route>>() {}.type
 val listFLightsType: Type = object: TypeToken<List<Flight>>() {}.type
+val listTicketsType: Type = object : TypeToken<List<Ticket>>() {}.type
 
 /**
  * Helper class, represents API response
@@ -71,6 +72,9 @@ class JsendDeserializer : JsonDeserializer<JsendResponse> {
                 } else if (data.asJsonObject.has("flights")) {
                     val e = data.asJsonObject.get("flights").asJsonArray
                     result.listData = gson.fromJson(e, listFLightsType)
+                } else if (data.asJsonObject.has("tickets")) {
+                    val e = data.asJsonObject.get("tickets").asJsonArray
+                    result.listData = gson.fromJson(e, listTicketsType)
                 } else {
                     when {
                         data.asJsonObject.has("routeId") -> result.data = gson.fromJson(data.asJsonObject, Route::class.java)

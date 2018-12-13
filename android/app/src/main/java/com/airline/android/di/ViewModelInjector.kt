@@ -1,10 +1,7 @@
 package com.airline.android.di
 
-import com.airline.android.vm.FlightsViewModel
-import com.airline.android.vm.HomeViewModel
-import com.airline.android.vm.RoutesViewModel
 import com.airline.android.ui.LoginActivity
-import com.airline.android.vm.SignUpViewModel
+import com.airline.android.vm.*
 import dagger.Component
 import javax.inject.Singleton
 
@@ -38,4 +35,9 @@ interface ViewModelInjector {
      * Injector for [RoutesViewModel]
      */
     fun inject(routesViewModel: RoutesViewModel)
+
+    /**
+     * Injector for [TicketsViewModel]
+     */
+    fun inject(ticketsViewModel: TicketsViewModel)
 }

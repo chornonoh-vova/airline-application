@@ -32,6 +32,7 @@ open class BaseViewModel : ViewModel() {
             is RoutesViewModel -> injector.inject(this)
             is SignUpViewModel -> injector.inject(this)
             is HomeViewModel -> injector.inject(this)
+            is TicketsViewModel -> injector.inject(this)
         }
     }
 }

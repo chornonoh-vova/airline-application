@@ -1,5 +1,6 @@
 package com.airline.android.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -10,9 +11,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.airline.android.App
 import com.airline.android.R
+import com.airline.android.net.Credentials
 import com.airline.android.ui.fragments.FlightsFragment
 import com.airline.android.ui.fragments.HomeFragment
 import com.airline.android.ui.fragments.RoutesFragment
+import com.airline.android.ui.fragments.TicketsFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -40,11 +43,10 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val id = (application as App).loadUserId()
-
         // setup navigation view
         mNavigationView.setNavigationItemSelectedListener {
             if (it.itemId == R.id.logout_action) {
+                logout()
                 return@setNavigationItemSelectedListener false
             }
 
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
                 R.id.flights_action -> FlightsFragment()
                 R.id.home_action -> HomeFragment()
                 R.id.routes_action -> RoutesFragment()
+                R.id.tickets_action -> TicketsFragment()
                 else -> Fragment()
             }
 
@@ -80,6 +83,15 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
         showHomeFragment()
     }
 
+    private fun logout() {
+        val app = application as App
+        app.saveCredentials(Credentials.empty())
+        app.saveUserId(0)
+        val intent = Intent(this, SplashActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -90,11 +102,29 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
         }
     }
 
-    private fun showHomeFragment() = showFragment(HomeFragment())
+    private fun showHomeFragment() {
+        mNavigationView.setCheckedItem(R.id.home_action)
+        mToolbar.title = getText(R.string.home_action)
+        showFragment(HomeFragment())
+    }
 
-    fun showFlightsFragment() = showFragment(FlightsFragment())
+    fun showFlightsFragment() {
+        mNavigationView.setCheckedItem(R.id.flights_action)
+        mToolbar.title = getText(R.string.flights_action)
+        showFragment(FlightsFragment())
+    }
 
-    fun showRoutesFragment() = showFragment(RoutesFragment())
+    fun showRoutesFragment() {
+        mNavigationView.setCheckedItem(R.id.routes_action)
+        mToolbar.title = getText(R.string.routes_action)
+        showFragment(RoutesFragment())
+    }
+
+    fun showTicketsFragment() {
+        mNavigationView.setCheckedItem(R.id.tickets_action)
+        mToolbar.title = getText(R.string.tickets_action)
+        showFragment(TicketsFragment())
+    }
 
     private fun showFragment(fragment: Fragment) {
         with(supportFragmentManager.beginTransaction()) {

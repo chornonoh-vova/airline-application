@@ -36,8 +36,7 @@ class HomeFragment: Fragment() {
         }
 
         ticketsLink.setOnClickListener {
-            // TODO: actually switch to tickets fragment
-            mainActivity.showSnackbar("Switching to tickets fragment")
+            mainActivity.showTicketsFragment()
         }
 
         profileLink.setOnClickListener {

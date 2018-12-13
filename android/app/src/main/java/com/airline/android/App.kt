@@ -40,7 +40,7 @@ class App : Application() {
             // if empty credentials passed, then user is logged out
             putBoolean(Const.PREFS_LOGGED_FLAG, !credentials.isEmpty())
             putString(Const.PREFS_AUTH_TYPE, credentials.authType)
-            putString(Const.PREFS_SESSION_ID_KEY, credentials.sessionId);
+            putString(Const.PREFS_SESSION_ID_KEY, credentials.sessionId)
             return commit()
         }
     }

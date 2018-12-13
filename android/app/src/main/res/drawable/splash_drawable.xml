@@ -4,8 +4,8 @@
     <item android:drawable="@color/splashBackgroundColor" />
 
     <item
-        android:left="300dp"
-        android:right="300dp">
+        android:left="400dp"
+        android:right="400dp">
         <bitmap
             android:gravity="center"
             android:src="@drawable/ic_launcher_round" />
