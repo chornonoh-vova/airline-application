@@ -21,7 +21,7 @@ import com.airline.android.ui.MainActivity
 import com.airline.android.ui.adapter.FlightsAdapter
 import com.airline.android.vm.FlightsViewModel
 
-class FlightsFragment: Fragment() {
+class FlightsFragment : Fragment() {
     private lateinit var additionalFields: ConstraintLayout
     private lateinit var expandCollapse: ImageButton
 
@@ -71,6 +71,7 @@ class FlightsFragment: Fragment() {
             flightsAdapter.dataset = it
         })
     }
+
     private val searchClickListener = View.OnClickListener {
         hideKeyboard()
         val mainActivity = activity as MainActivity
@@ -89,6 +90,7 @@ class FlightsFragment: Fragment() {
         val mainActivity = activity as MainActivity
         mainActivity.showSnackbar(it.toString())
     }
+
     private fun hideKeyboard() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)

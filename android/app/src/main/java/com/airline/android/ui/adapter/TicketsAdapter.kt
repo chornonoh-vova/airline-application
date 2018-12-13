@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airline.android.R
 import com.airline.android.model.Ticket
 
-class TicketsAdapter(dataset: List<Ticket>): RecyclerView.Adapter<TicketsAdapter.ViewHolder>() {
+class TicketsAdapter(dataset: List<Ticket>) : RecyclerView.Adapter<TicketsAdapter.ViewHolder>() {
     var dataset = dataset
         set(value) {
             field = value
@@ -26,7 +26,7 @@ class TicketsAdapter(dataset: List<Ticket>): RecyclerView.Adapter<TicketsAdapter
         holder.ticketSeatNumber.text = context.getString(R.string.ticket_seat_number_text, dataset[position].seat)
     }
 
-    class ViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val flightNumber: TextView = view.findViewById(R.id.flight_number)
         val ticketSeatNumber: TextView = view.findViewById(R.id.ticket_seat_number)
     }

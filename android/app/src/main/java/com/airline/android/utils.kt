@@ -10,7 +10,7 @@ data class LoginRequest(
     val password: String
 )
 
-data class AddPassengerRequest (
+data class AddPassengerRequest(
     val firstName: String,
     val lastName: String,
     val address: String,

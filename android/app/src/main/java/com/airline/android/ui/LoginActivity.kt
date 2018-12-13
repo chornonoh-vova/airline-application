@@ -1,11 +1,11 @@
 package com.airline.android.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.airline.android.*
 import com.airline.android.di.DaggerViewModelInjector
 import com.airline.android.di.NetModule
@@ -51,7 +51,8 @@ class LoginActivity : AppCompatActivity() {
         findViewById<Button>(R.id.sign_up_button)
     }
 
-    @Inject lateinit var api: AirlineApi
+    @Inject
+    lateinit var api: AirlineApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private val callback = object: Callback<JsendResponse> {
+    private val callback = object : Callback<JsendResponse> {
         override fun onFailure(call: Call<JsendResponse>, t: Throwable) {
             Toast.makeText(this@LoginActivity, "Network error: " + t.message, Toast.LENGTH_LONG).show()
         }
@@ -94,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
         override fun onResponse(call: Call<JsendResponse>, response: Response<JsendResponse>) {
             val body = response.body()
             if (body != null) {
-                when(body.status) {
+                when (body.status) {
                     "success" -> {
                         val data = body.data as LoginResponse
                         (application as App).saveCredentials(Credentials("Basic", data.sessionKey))

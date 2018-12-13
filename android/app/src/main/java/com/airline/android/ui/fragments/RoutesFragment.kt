@@ -21,7 +21,7 @@ import com.airline.android.ui.MainActivity
 import com.airline.android.ui.adapter.RoutesAdapter
 import com.airline.android.vm.RoutesViewModel
 
-class RoutesFragment: Fragment() {
+class RoutesFragment : Fragment() {
     private lateinit var additionalFields: ConstraintLayout
     private lateinit var expandCollapse: ImageButton
 

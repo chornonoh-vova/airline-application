@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
 
             mToolbar.title = it.title
 
-            val fragment = when(it.itemId) {
+            val fragment = when (it.itemId) {
                 R.id.flights_action -> FlightsFragment()
                 R.id.home_action -> HomeFragment()
                 R.id.routes_action -> RoutesFragment()

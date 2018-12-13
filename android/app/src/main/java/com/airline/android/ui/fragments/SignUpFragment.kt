@@ -1,14 +1,14 @@
 package com.airline.android.ui.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.airline.android.R
 import com.airline.android.emailValidator
 import com.airline.android.hash
@@ -73,7 +73,7 @@ class SignUpFragment : Fragment() {
 
             viewModel.tryToSignUp(email, password.hash()).observe(this, Observer { resp ->
                 val act = activity as SignUpActivity
-                when(resp.status) {
+                when (resp.status) {
                     "success" -> {
                         viewModel.userId = (resp.data as UserIdResponse).userId
                         // navigate to next fragment

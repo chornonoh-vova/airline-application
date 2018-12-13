@@ -11,12 +11,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.airline.android.R
 import com.airline.android.model.JsendFail
-import com.airline.android.model.UserIdResponse
 import com.airline.android.ui.SignUpActivity
 import com.airline.android.vm.SignUpViewModel
 import com.google.android.material.textfield.TextInputLayout
 
-class PassengerInfoFragment: Fragment() {
+class PassengerInfoFragment : Fragment() {
     private lateinit var firstNameInputLayout: TextInputLayout
     private lateinit var firstNameInput: TextView
 
@@ -86,7 +85,7 @@ class PassengerInfoFragment: Fragment() {
 
             viewModel.addPassengerInfo(firstName, lastName, address, phone).observe(this, Observer { resp ->
                 val act = activity as SignUpActivity
-                when(resp.status) {
+                when (resp.status) {
                     "success" -> {
                         // navigate back to login
                         act.onBackPressed()

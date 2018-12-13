@@ -12,7 +12,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class TicketsViewModel : BaseViewModel() {
-    @Inject lateinit var api: AirlineApi
+    @Inject
+    lateinit var api: AirlineApi
 
     lateinit var tickets: MutableLiveData<List<Ticket>>
 
@@ -35,7 +36,7 @@ class TicketsViewModel : BaseViewModel() {
             override fun onResponse(call: Call<JsendResponse>, response: Response<JsendResponse>) {
                 val body = response.body()
                 if (body != null) {
-                    when(body.status) {
+                    when (body.status) {
                         "success" -> tickets.value = body.listData as List<Ticket>?
                         "fail" -> errorCallback("Failure: ${(body.data as JsendFail).message}")
                         "error" -> errorCallback("Error: ${body.message}")

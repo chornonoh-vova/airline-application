@@ -1,8 +1,7 @@
 package com.airline.android.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import com.airline.android.R
@@ -25,7 +24,7 @@ class SignUpActivity : AppCompatActivity() {
             currentFragment = savedInstanceState.getInt("savedFragmentIndex", 0)
         }
 
-        when(currentFragment) {
+        when (currentFragment) {
             0 -> showSignUpFragment()
             1 -> showPassengerInfoFragment()
             else -> showSignUpFragment()
