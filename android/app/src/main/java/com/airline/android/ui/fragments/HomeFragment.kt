@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.airline.android.R
 import com.airline.android.ui.MainActivity
 
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
     private lateinit var routesLink: TextView
     private lateinit var flightsLink: TextView
     private lateinit var ticketsLink: TextView
@@ -36,8 +36,7 @@ class HomeFragment: Fragment() {
         }
 
         ticketsLink.setOnClickListener {
-            // TODO: actually switch to tickets fragment
-            mainActivity.showSnackbar("Switching to tickets fragment")
+            mainActivity.showTicketsFragment()
         }
 
         profileLink.setOnClickListener {

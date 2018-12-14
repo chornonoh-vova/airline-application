@@ -1,8 +1,8 @@
 package com.airline.android.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.airline.android.App
 
 class SplashActivity : AppCompatActivity() {

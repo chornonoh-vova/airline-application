@@ -12,7 +12,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class SignUpViewModel(var userId: Int = 0) : BaseViewModel() {
-    @Inject lateinit var api: AirlineApi
+    @Inject
+    lateinit var api: AirlineApi
 
     fun tryToSignUp(email: String, password: String): LiveData<JsendResponse> {
         val resp = MutableLiveData<JsendResponse>()

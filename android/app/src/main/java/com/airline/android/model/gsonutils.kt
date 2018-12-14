@@ -11,7 +11,8 @@ import java.lang.reflect.Type
  * Type tokens needed for Gson deserialization of generic types
  */
 val listRoutesType: Type = object : TypeToken<List<Route>>() {}.type
-val listFLightsType: Type = object: TypeToken<List<Flight>>() {}.type
+val listFLightsType: Type = object : TypeToken<List<Flight>>() {}.type
+val listTicketsType: Type = object : TypeToken<List<Ticket>>() {}.type
 
 /**
  * Helper class, represents API response
@@ -29,11 +30,11 @@ data class JsendResponse(
 data class LoginResponse(
     val sessionKey: String,
     val userId: Int
-): Data
+) : Data
 
 data class UserIdResponse(
     val userId: Int
-): Data
+) : Data
 
 /**
  * Helper class, represents fail data
@@ -53,7 +54,7 @@ class JsendDeserializer : JsonDeserializer<JsendResponse> {
         json: JsonElement,
         typeOfT: Type,
         context: JsonDeserializationContext
-    ) : JsendResponse {
+    ): JsendResponse {
         val jsendObject = json.asJsonObject
 
         val gson = Gson()
@@ -71,12 +72,19 @@ class JsendDeserializer : JsonDeserializer<JsendResponse> {
                 } else if (data.asJsonObject.has("flights")) {
                     val e = data.asJsonObject.get("flights").asJsonArray
                     result.listData = gson.fromJson(e, listFLightsType)
+                } else if (data.asJsonObject.has("tickets")) {
+                    val e = data.asJsonObject.get("tickets").asJsonArray
+                    result.listData = gson.fromJson(e, listTicketsType)
                 } else {
                     when {
-                        data.asJsonObject.has("routeId") -> result.data = gson.fromJson(data.asJsonObject, Route::class.java)
-                        data.asJsonObject.has("flightId") -> result.data = gson.fromJson(data.asJsonObject, Flight::class.java)
-                        data.asJsonObject.has("sessionKey") -> result.data = gson.fromJson(data.asJsonObject, LoginResponse::class.java)
-                        data.asJsonObject.has("userId") -> result.data = gson.fromJson(data.asJsonObject, UserIdResponse::class.java)
+                        data.asJsonObject.has("routeId") -> result.data =
+                                gson.fromJson(data.asJsonObject, Route::class.java)
+                        data.asJsonObject.has("flightId") -> result.data =
+                                gson.fromJson(data.asJsonObject, Flight::class.java)
+                        data.asJsonObject.has("sessionKey") -> result.data =
+                                gson.fromJson(data.asJsonObject, LoginResponse::class.java)
+                        data.asJsonObject.has("userId") -> result.data =
+                                gson.fromJson(data.asJsonObject, UserIdResponse::class.java)
                     }
                 }
             }

@@ -17,6 +17,9 @@ interface AirlineApi {
     @GET("/flights")
     fun getFlights(): Call<JsendResponse>
 
+    @GET("tickets")
+    fun getTickets(): Call<JsendResponse>
+
     @GET("/search/flights")
     fun searchFlights(
         @Query("from") from: String?,
