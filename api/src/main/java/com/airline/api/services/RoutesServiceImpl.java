@@ -1,7 +1,9 @@
 package com.airline.api.services;
 
 import com.airline.api.model.Routes;
+import com.airline.api.model.Flights;
 import com.airline.api.repositories.RoutesRepository;
+import com.airline.api.repositories.FlightsRepository;
 import com.airline.api.search.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +15,22 @@ import java.util.Optional;
 @Service
 public class RoutesServiceImpl implements RoutesService {
   private final RoutesRepository routesRepository;
+  private final FlightsRepository flightsRepository;
 
   @Autowired
-  public RoutesServiceImpl(RoutesRepository routesRepository) {
+  public RoutesServiceImpl(RoutesRepository routesRepository, FlightsRepository flightsRepository) {
     this.routesRepository = routesRepository;
+    this.flightsRepository = flightsRepository;
   }
 
   @Override
   public List<Routes> getAllRoutes() {
     return routesRepository.findAll();
+  }
+
+  @Override
+  public List<Flights> getFlightsForRoute(int routeId) {
+    return flightsRepository.getAllByRouteId(routeId);
   }
 
   @Override
