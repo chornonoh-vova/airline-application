@@ -23,13 +23,14 @@ public class Flights implements JsendData, Serializable {
   @Column(name = "cancellation_status")
   private boolean cancellationStatus;
 
-  @OneToOne
-  @JoinColumn(name = "pilot_id")
-  private Pilots pilot;
+  @Column(name = "route_id")
+  private int routeId;
 
-  @OneToOne
-  @JoinColumn(name = "airplane_id")
-  private Airplanes airplane;
+  @Column(name = "pilot_id")
+  private int pilotId;
+
+  @Column(name = "airplane_id")
+  private int airplaneId;
 
   public Flights() {
   }
@@ -40,6 +41,14 @@ public class Flights implements JsendData, Serializable {
 
   public void setFlightId(int flightId) {
     this.flightId = flightId;
+  }
+
+  public int getRouteId() {
+    return routeId;
+  }
+
+  public void setRouteId(int routeId) {
+    this.routeId = routeId;
   }
 
   public String getDepartureTime() {
@@ -66,19 +75,19 @@ public class Flights implements JsendData, Serializable {
     this.cancellationStatus = cancellationStatus;
   }
 
-  public Pilots getPilot() {
-    return pilot;
+  public int getPilotId() {
+    return pilotId;
   }
 
-  public void setPilot(Pilots pilot) {
-    this.pilot = pilot;
+  public void setPilotId(int pilotId) {
+    this.pilotId = pilotId;
   }
 
-  public Airplanes getAirplane() {
-    return airplane;
+  public int getAirplaneId() {
+    return airplaneId;
   }
 
-  public void setAirplane(Airplanes airplane) {
-    this.airplane = airplane;
+  public void setAirplaneId(int airplaneId) {
+    this.airplaneId = airplaneId;
   }
 }
