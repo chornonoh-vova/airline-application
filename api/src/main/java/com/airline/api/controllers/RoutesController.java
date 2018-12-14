@@ -1,6 +1,7 @@
 package com.airline.api.controllers;
 
 import com.airline.api.model.Routes;
+import com.airline.api.model.Flights;
 import com.airline.api.services.RoutesService;
 import com.airline.api.utils.JsendData;
 import com.airline.api.utils.JsendResponse;
@@ -26,6 +27,16 @@ public class RoutesController {
     JsendData data =
         new JsendData() {
           public List<Routes> routes = routesService.getAllRoutes();
+        };
+    return new JsendResponse("success", data);
+  }
+
+  @GetMapping("/routes/{routeId}/flights")
+  @ResponseBody
+  public JsendResponse getFlightsForRoute(@PathVariable int routeId) {
+    JsendData data =
+        new JsendData() {
+          public List<Flights> flights = routesService.getFlightsForRoute(routeId);
         };
     return new JsendResponse("success", data);
   }
