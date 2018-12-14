@@ -66,12 +66,10 @@ public class FlightsController {
       /*, @RequestHeader(name = "Authorization") String authorization*/ ) {
     // TODO: add admin authorization
     try {
-      body = flightsService.add(body);
-      Flights finalBody = body;
       return new JsendResponse(
           "success",
           new JsendData() {
-            public int flightId = finalBody.getFlightId();
+            public int flightId = flightsService.add(body).getFlightId();
           });
     } catch (Exception e) {
       return new JsendResponse("fail", new Message(e.getMessage()));
