@@ -14,7 +14,7 @@ data class AddPassengerRequest(
     val firstName: String,
     val lastName: String,
     val address: String,
-    val phone: String
+    val phoneNumber: String
 )
 
 fun String.hash(): String {

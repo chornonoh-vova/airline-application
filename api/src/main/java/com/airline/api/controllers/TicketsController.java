@@ -15,14 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class TicketsController {
+public class TicketsController extends BaseController {
   private final TicketsService ticketsService;
   private final AuthService authService;
+  private final AuthHelper authHelper;
 
   @Autowired
   public TicketsController(TicketsService ticketsService, AuthService authService) {
     this.ticketsService = ticketsService;
     this.authService = authService;
+    this.authHelper = new AuthHelper(authService);
   }
 
   @GetMapping("/tickets")
@@ -32,16 +34,15 @@ public class TicketsController {
     Users user = authService.getUserBySessionKey(sessionKey);
     if (user != null) {
       if (user.getPassenger() == null) {
-        return new JsendResponse("fail", new Message("Add passenger info before"));
+        return fail("Add passenger info before");
       }
-      JsendData data =
-          new JsendData() {
-            public List<Tickets> tickets =
-                ticketsService.getAllTickets(user.getPassenger().getPassengerId());
-          };
-      return new JsendResponse("success", data);
+      JsendData data = new JsendData() {
+        public List<Tickets> tickets =
+            ticketsService.getAllTickets(user.getPassenger().getPassengerId());
+      };
+      return success(data);
     } else {
-      return new JsendResponse("fail", new Message("Wrong authorization"));
+      return authHelper.UNAUTHORIZED;
     }
   }
 
@@ -55,38 +56,33 @@ public class TicketsController {
       if (user.getPassenger() == null) {
         return new JsendResponse("fail", new Message("Add passenger info before"));
       }
-      return ticketsService
-          .getTicketById(user.getPassenger().getPassengerId(), ticketId)
-          .map(
-              tickets ->
-                  new JsendResponse(
-                      "success",
-                      new JsendData() {
-                        public Tickets ticket = tickets;
-                      }))
-          .orElseGet(() -> new JsendResponse("fail", new Message("Ticket not found")));
+      return ticketsService.getTicketById(user.getPassenger().getPassengerId(), ticketId)
+          .map(tickets -> success(new JsendData() { public Tickets ticket = tickets; }))
+          .orElseGet(() -> fail("Ticket not found"));
     } else {
-      return new JsendResponse("fail", new Message("Wrong authorization"));
+      return authHelper.UNAUTHORIZED;
     }
   }
 
   @PostMapping("/tickets/{flightId}")
   @ResponseBody
-  public JsendResponse buyTicket(
-      @RequestHeader(name = "Authorization") String authorization, @PathVariable int flightId, @RequestBody BuyRequest body) {
+  public JsendResponse buyTicket(@RequestHeader(name = "Authorization") String authorization,
+      @PathVariable int flightId, @RequestBody BuyRequest body) {
     String sessionKey = HeaderUtils.getSessionKey(authorization);
     Users user = authService.getUserBySessionKey(sessionKey);
     if (user != null) {
       if (user.getPassenger() == null) {
-        return new JsendResponse("fail", new Message("Add passenger info before"));
+        return fail("Add passenger info before");
       }
-      return new JsendResponse("success", ticketsService.buy(user.getPassenger().getPassengerId(), flightId, body.seat));
+      JsendData data = new JsendData() {
+        public Tickets ticket =
+            ticketsService.buy(user.getPassenger().getPassengerId(), flightId, body.seat);
+      };
+      return success(data);
     } else {
-      return new JsendResponse("fail", new Message("Wrong authorization"));
+      return authHelper.UNAUTHORIZED;
     }
   }
 
-  private static class BuyRequest {
-    public String seat;
-  }
+  private static class BuyRequest { public String seat; }
 }

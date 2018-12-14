@@ -70,6 +70,16 @@ public class AuthServiceImpl implements AuthService {
   }
 
   @Override
+  public Users getUser(int userId) {
+    return usersRepository.getOne(userId);
+  }
+
+  @Override
+  public Passengers getPassengerInfo(int userId) {
+    return usersRepository.getOne(userId).getPassenger();
+  }
+
+  @Override
   public Passengers addPassengerInfo(
       int userId, String firstName, String lastName, String address, String phoneNumber) {
     Optional<Users> user = usersRepository.findById(userId);

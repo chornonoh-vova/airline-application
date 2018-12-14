@@ -32,6 +32,20 @@ public interface AuthService {
   Users register(String email, String password);
 
   /**
+   * Get users information by specified id
+   * @param userId
+   * @return
+   */
+  Users getUser(int userId);
+
+  /**
+   * Get passenger info of specified user
+   * @param userId
+   * @return
+   */
+  Passengers getPassengerInfo(int userId);
+
+  /**
    * Add passenger info for user
    *
    * @param userId users id

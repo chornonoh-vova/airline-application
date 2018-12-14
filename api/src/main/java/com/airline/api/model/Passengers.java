@@ -1,6 +1,7 @@
 package com.airline.api.model;
 
 import com.airline.api.utils.JsendData;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,6 +26,7 @@ public class Passengers implements Serializable, JsendData {
   @Column(name = "phone_number")
   private String phoneNumber;
 
+  @JsonIgnore
   @OneToOne()
   @JoinColumn(name = "user_id")
   private Users user;

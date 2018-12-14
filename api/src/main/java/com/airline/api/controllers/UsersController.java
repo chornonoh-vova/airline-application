@@ -1,161 +1,107 @@
 package com.airline.api.controllers;
 
 import com.airline.api.model.Passengers;
-import com.airline.api.model.Users;
 import com.airline.api.model.Sessions;
+import com.airline.api.model.Users;
 import com.airline.api.services.AuthService;
 import com.airline.api.utils.JsendData;
 import com.airline.api.utils.JsendResponse;
-import com.airline.api.utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class UsersController {
+public class UsersController extends BaseController {
   private final AuthService authService;
+  private final AuthHelper authHelper;
 
   @Autowired
   public UsersController(AuthService authService) {
     this.authService = authService;
+    this.authHelper = new AuthHelper(authService);
   }
 
   @PostMapping("/login")
   @ResponseBody
   public JsendResponse login(@RequestBody LoginRequest body) {
-    JsendResponse resp;
     Sessions session = authService.login(body.email, body.password);
     if (session == null) {
-      resp = new JsendResponse("fail", new Message("Wrong email or password"));
+      return fail("Wrong email or password");
     } else {
-      resp =
-          new JsendResponse(
-              "success",
-              new JsendData() {
-                public String sessionKey = session.getSessionKey();
-                public int userId = session.getUsers().getUserId();
-              });
+      return success(new JsendData() {
+        public String sessionKey = session.getSessionKey();
+        public int userId = session.getUsers().getUserId();
+      });
     }
-    return resp;
+  }
+
+  @GetMapping("/users/{userId}")
+  @ResponseBody
+  public JsendResponse getUserInfo(
+      @PathVariable int userId, @RequestHeader(name = "Authorization") String authorization) {
+    if (authHelper.isRegularUser(authorization)) {
+      JsendData data = new JsendData() { public Users user = authService.getUser(userId); };
+      return success(data);
+    } else {
+      return authHelper.UNAUTHORIZED;
+    }
+  }
+
+  @GetMapping("/users/{userId}/passengerInfo")
+  @ResponseBody
+  public JsendResponse getPassengerInfo(
+      @PathVariable int userId, @RequestHeader(name = "Authorization") String authorization) {
+    if (authHelper.isRegularUser(authorization)) {
+      JsendData data =
+          new JsendData() { public Passengers passenger = authService.getPassengerInfo(userId); };
+      return success(data);
+    } else {
+      return authHelper.UNAUTHORIZED;
+    }
   }
 
   @PostMapping("/logout")
   @ResponseBody
   public JsendResponse logout(@RequestBody LogoutRequest body) {
     if (authService.logout(body.sessionKey)) {
-      return new JsendResponse("success", new Message("Session removed"));
+      return success("Session removed");
     } else {
-      return new JsendResponse("fail", new Message("Removing failed"));
+      return fail("Removing failed");
     }
   }
 
   @PostMapping("/register")
   @ResponseBody
   public JsendResponse register(@RequestBody LoginRequest body) {
-    JsendResponse resp;
     try {
       Users u = authService.register(body.email, body.password);
-      resp = new JsendResponse("success", new JsendData() {
-          public int userId = u.getUserId();
-        });
+      return success(new JsendData() { public int userId = u.getUserId(); });
     } catch (Exception e) {
-      resp = new JsendResponse("fail", new Message(e.getMessage()));
+      return fail(e.getMessage());
     }
-    return resp;
   }
 
   @PostMapping("/users/{userId}/passengerInfo")
   @ResponseBody
   public JsendResponse addPassengerInfo(
       @PathVariable int userId, @RequestBody PassengerRequest body) {
-    Passengers p =
-        authService.addPassengerInfo(
-            userId, body.firstName, body.lastName, body.address, body.phoneNumber);
-    JsendData data =
-        new JsendData() {
-          public int passengerId = p.getPassengerId();
-        };
-    return new JsendResponse("success", data);
+    Passengers p = authService.addPassengerInfo(
+        userId, body.firstName, body.lastName, body.address, body.phoneNumber);
+    JsendData data = new JsendData() { public int passengerId = p.getPassengerId(); };
+    return success(data);
   }
 
   public static class PassengerRequest {
-    String lastName;
-    String firstName;
-    String address;
-    String phoneNumber;
-
-    public PassengerRequest() {}
-
-    public String getLastName() {
-      return lastName;
-    }
-
-    public void setLastName(String lastName) {
-      this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-      return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-      this.firstName = firstName;
-    }
-
-    public String getAddress() {
-      return address;
-    }
-
-    public void setAddress(String address) {
-      this.address = address;
-    }
-
-    public String getPhoneNumber() {
-      return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-      this.phoneNumber = phoneNumber;
-    }
+    public String lastName;
+    public String firstName;
+    public String address;
+    public String phoneNumber;
   }
 
   public static class LoginRequest {
-    String email;
-    String password;
-
-    public LoginRequest() {}
-
-    public String getEmail() {
-      return email;
-    }
-
-    public void setEmail(String email) {
-      this.email = email;
-    }
-
-    public String getPassword() {
-      return password;
-    }
-
-    public void setPassword(String password) {
-      this.password = password;
-    }
+    public String email;
+    public String password;
   }
 
-  public static class LogoutRequest {
-    String sessionKey;
-
-    public LogoutRequest() {}
-
-    public String getSessionKey() {
-      return sessionKey;
-    }
-
-    public void setSessionKey(String sessionKey) {
-      this.sessionKey = sessionKey;
-    }
-  }
+  public static class LogoutRequest { public String sessionKey; }
 }
