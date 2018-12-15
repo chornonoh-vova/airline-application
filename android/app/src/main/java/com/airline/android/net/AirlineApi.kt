@@ -14,6 +14,12 @@ interface AirlineApi {
     @GET("/routes")
     fun getRoutes(): Call<JsendResponse>
 
+    @GET("/routes/{routeId}")
+    fun getRoute(@Path("routeId") routeId: Int): Call<JsendResponse>
+
+    @GET("/routes/{routeId}/flights")
+    fun getFlightsForRoute(@Path("routeId") routeId: Int): Call<JsendResponse>
+
     @GET("/flights")
     fun getFlights(): Call<JsendResponse>
 

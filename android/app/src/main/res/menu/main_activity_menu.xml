@@ -10,10 +10,6 @@
             android:icon="@drawable/ic_route"
             android:title="@string/routes_action"/>
         <item
-            android:id="@+id/flights_action"
-            android:icon="@drawable/ic_flight"
-            android:title="@string/flights_action"/>
-        <item
             android:id="@+id/tickets_action"
             android:icon="@drawable/ic_ticket"
             android:title="@string/tickets_action"/>

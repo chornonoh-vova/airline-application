@@ -9,6 +9,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.airline.android.App
 import com.airline.android.R
 import com.airline.android.net.Credentials
@@ -25,6 +26,8 @@ import com.google.android.material.snackbar.Snackbar
  * @see R.layout.activity_main - xml layout of page
  */
 class MainActivity : AppCompatActivity(), CallbackActivity {
+    private val BACK_STACK_ROOT_TAG = "root_fragment"
+
     private val mToolbar by lazy {
         findViewById<Toolbar>(R.id.main_activity_toolbar)
     }
@@ -56,7 +59,6 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
             mToolbar.title = it.title
 
             val fragment = when (it.itemId) {
-                R.id.flights_action -> FlightsFragment()
                 R.id.home_action -> HomeFragment()
                 R.id.routes_action -> RoutesFragment()
                 R.id.tickets_action -> TicketsFragment()
@@ -80,7 +82,15 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
         mNavigationView.setCheckedItem(R.id.home_action)
 
         // setting home fragment activated by default
-        showHomeFragment()
+        with(supportFragmentManager) {
+            popBackStack(BACK_STACK_ROOT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
+            // Add the new tab fragment
+            beginTransaction()
+                .replace(R.id.main_content_container, HomeFragment())
+                .addToBackStack(BACK_STACK_ROOT_TAG)
+                .commit()
+        }
     }
 
     private fun logout() {
@@ -102,18 +112,6 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
         }
     }
 
-    private fun showHomeFragment() {
-        mNavigationView.setCheckedItem(R.id.home_action)
-        mToolbar.title = getText(R.string.home_action)
-        showFragment(HomeFragment())
-    }
-
-    fun showFlightsFragment() {
-        mNavigationView.setCheckedItem(R.id.flights_action)
-        mToolbar.title = getText(R.string.flights_action)
-        showFragment(FlightsFragment())
-    }
-
     fun showRoutesFragment() {
         mNavigationView.setCheckedItem(R.id.routes_action)
         mToolbar.title = getText(R.string.routes_action)
@@ -127,9 +125,11 @@ class MainActivity : AppCompatActivity(), CallbackActivity {
     }
 
     private fun showFragment(fragment: Fragment) {
-        with(supportFragmentManager.beginTransaction()) {
-            this.replace(R.id.main_content_container, fragment)
-            this.commit()
+        with(supportFragmentManager) {
+            beginTransaction()
+                .replace(R.id.main_content_container, fragment)
+                .addToBackStack(null)
+                .commit()
         }
     }
 

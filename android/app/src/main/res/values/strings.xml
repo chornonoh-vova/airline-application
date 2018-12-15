@@ -36,6 +36,8 @@
     <string name="flight_number_text">Flight number: %1$d</string>
     <string name="flight_status_text">Cancelled: %1$s</string>
     <string name="ticket_seat_number_text">Your seat: %1$s</string>
+    <string name="routes_activity">Route</string>
+    <string name="available_tickets">Available tickets:</string>
 
     <!-- For routes spinner -->
     <string-array name="routes_sort_by">

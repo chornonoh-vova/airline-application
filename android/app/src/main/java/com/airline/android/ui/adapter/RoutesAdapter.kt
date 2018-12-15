@@ -6,9 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.airline.android.R
+import com.airline.android.RouteItemClick
 import com.airline.android.model.Route
 
-class RoutesAdapter(dataset: List<Route>) : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
+class RoutesAdapter(
+    dataset: List<Route>,
+    private val listener: RouteItemClick
+) : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     var dataset = dataset
         set(value) {
             field = value
@@ -25,6 +29,7 @@ class RoutesAdapter(dataset: List<Route>) : RecyclerView.Adapter<RoutesAdapter.V
         holder.from.text = dataset[position].departureAirport
         holder.duration.text = dataset[position].duration
         holder.price.text = dataset[position].price.toString()
+        holder.bind(dataset[position], listener)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,5 +37,11 @@ class RoutesAdapter(dataset: List<Route>) : RecyclerView.Adapter<RoutesAdapter.V
         val from: TextView = itemView.findViewById(R.id.route_from_text)
         val duration: TextView = itemView.findViewById(R.id.route_duration)
         val price: TextView = itemView.findViewById(R.id.route_price)
+
+        fun bind(route: Route, listener: RouteItemClick) {
+            itemView.setOnClickListener {
+                listener(route)
+            }
+        }
     }
 }

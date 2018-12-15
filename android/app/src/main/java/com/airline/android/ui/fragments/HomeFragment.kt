@@ -11,7 +11,6 @@ import com.airline.android.ui.MainActivity
 
 class HomeFragment : Fragment() {
     private lateinit var routesLink: TextView
-    private lateinit var flightsLink: TextView
     private lateinit var ticketsLink: TextView
     private lateinit var profileLink: TextView
 
@@ -21,7 +20,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         routesLink = view.findViewById(R.id.routes_link)
-        flightsLink = view.findViewById(R.id.flights_link)
         ticketsLink = view.findViewById(R.id.tickets_link)
         profileLink = view.findViewById(R.id.profile_link)
 
@@ -29,10 +27,6 @@ class HomeFragment : Fragment() {
 
         routesLink.setOnClickListener {
             mainActivity.showRoutesFragment()
-        }
-
-        flightsLink.setOnClickListener {
-            mainActivity.showFlightsFragment()
         }
 
         ticketsLink.setOnClickListener {

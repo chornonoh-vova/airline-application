@@ -29,6 +29,8 @@
         <activity
             android:name=".ui.SignUpActivity"
             android:parentActivityName=".ui.LoginActivity" />
+        <activity android:name=".ui.RouteDetailsActivity"
+            android:parentActivityName=".ui.MainActivity"/>
     </application>
 
 </manifest>

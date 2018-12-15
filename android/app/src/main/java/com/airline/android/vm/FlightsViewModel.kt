@@ -15,8 +15,9 @@ import javax.inject.Inject
 class FlightsViewModel : BaseViewModel() {
     @Inject
     lateinit var api: AirlineApi
-
+    val routeId = MutableLiveData<Int>()
     private lateinit var flights: MutableLiveData<List<Flight>>
+    private lateinit var flightsForRoute: MutableLiveData<List<Flight>>
 
     lateinit var errorCallback: (message: String?) -> Unit
 
@@ -48,6 +49,34 @@ class FlightsViewModel : BaseViewModel() {
             }
         }
         api.getFlights().enqueue(callback)
+    }
+
+    fun getFlightsForRoute(): LiveData<List<Flight>> {
+        if (!::flightsForRoute.isInitialized) {
+            flightsForRoute = MutableLiveData()
+            loadFlightsForRoute(routeId.value!!)
+        }
+        return flightsForRoute
+    }
+
+    private fun loadFlightsForRoute(routeId: Int) {
+        val callback = object : Callback<JsendResponse> {
+            override fun onFailure(call: Call<JsendResponse>, t: Throwable) {
+                errorCallback("Network error: ${t.message}")
+            }
+
+            override fun onResponse(call: Call<JsendResponse>, response: Response<JsendResponse>) {
+                val body = response.body()
+                if (body != null) {
+                    when(body.status) {
+                        "success" -> flightsForRoute.value = body.listData as List<Flight>?
+                        "fail" -> errorCallback((body.data as JsendFail).message)
+                        "error" -> errorCallback(body.message)
+                    }
+                }
+            }
+        }
+        api.getFlightsForRoute(routeId).enqueue(callback)
     }
 
     fun searchFlights(departure: String?, arrival: String, sort: String, order: String) {

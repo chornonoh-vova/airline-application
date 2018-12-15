@@ -65,27 +65,6 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
-        android:id="@+id/flights_link"
-        style="@style/TextAppearance.MaterialComponents.Body1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_corner"
-        android:drawableEnd="@drawable/ic_arrow_forward"
-        android:elevation="2dp"
-        android:padding="8dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/flights_action"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/routes_link" />
-
-    <TextView
         android:id="@+id/tickets_link"
         style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"
@@ -104,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flights_link" />
+        app:layout_constraintTop_toBottomOf="@+id/routes_link" />
 
     <TextView
         android:id="@+id/profile_link"

@@ -77,10 +77,10 @@ class JsendDeserializer : JsonDeserializer<JsendResponse> {
                     result.listData = gson.fromJson(e, listTicketsType)
                 } else {
                     when {
-                        data.asJsonObject.has("routeId") -> result.data =
-                                gson.fromJson(data.asJsonObject, Route::class.java)
-                        data.asJsonObject.has("flightId") -> result.data =
-                                gson.fromJson(data.asJsonObject, Flight::class.java)
+                        data.asJsonObject.has("route") -> result.data =
+                                gson.fromJson(data.asJsonObject.get("route"), Route::class.java)
+                        data.asJsonObject.has("flight") -> result.data =
+                                gson.fromJson(data.asJsonObject.get("flight"), Flight::class.java)
                         data.asJsonObject.has("sessionKey") -> result.data =
                                 gson.fromJson(data.asJsonObject, LoginResponse::class.java)
                         data.asJsonObject.has("userId") -> result.data =

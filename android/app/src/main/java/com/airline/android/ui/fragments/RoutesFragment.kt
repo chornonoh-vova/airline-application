@@ -1,6 +1,7 @@
 package com.airline.android.ui.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +17,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airline.android.Const
 import com.airline.android.R
+import com.airline.android.RouteItemClick
+import com.airline.android.model.Route
 import com.airline.android.ui.MainActivity
+import com.airline.android.ui.RouteDetailsActivity
 import com.airline.android.ui.adapter.RoutesAdapter
 import com.airline.android.vm.RoutesViewModel
 
@@ -69,7 +74,7 @@ class RoutesFragment : Fragment() {
         routesViewModel = ViewModelProviders.of(this).get(RoutesViewModel::class.java)
         routesViewModel.errorCallback = errorCallback
 
-        routesAdapter = RoutesAdapter(emptyList())
+        routesAdapter = RoutesAdapter(emptyList(), routeDetails)
         routesList.apply {
             layoutManager = LinearLayoutManager(activity)
             itemAnimator = DefaultItemAnimator()
@@ -100,6 +105,12 @@ class RoutesFragment : Fragment() {
         val order = orderSpinner.selectedItem.toString().toLowerCase()
 
         routesViewModel.searchRoutes(fromAirport, toAirport, sort, order)
+    }
+
+    private val routeDetails: RouteItemClick = {
+        val intent = Intent(activity, RouteDetailsActivity::class.java)
+        intent.putExtra(Const.ROUTE_ID_KEY, it.routeId)
+        activity?.startActivity(intent)
     }
 
     private val errorCallback: (message: String?) -> Unit = {

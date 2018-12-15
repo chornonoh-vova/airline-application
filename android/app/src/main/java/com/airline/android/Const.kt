@@ -15,6 +15,8 @@ object Const {
     // user id for profile
     const val PREFS_USER_ID_KEY = "USER_ID"
 
+    const val ROUTE_ID_KEY = "ROUTE_ID"
+
     // credentials for API authorization
     const val PREFS_SESSION_ID_KEY = "SESSION_ID"
     const val PREFS_AUTH_TYPE = "Basic"

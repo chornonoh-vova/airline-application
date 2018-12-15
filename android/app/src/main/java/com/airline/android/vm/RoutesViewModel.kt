@@ -12,11 +12,12 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
-class RoutesViewModel : BaseViewModel() {
+class RoutesViewModel(var routeId: Int = 0) : BaseViewModel() {
     @Inject
     lateinit var api: AirlineApi
 
     private lateinit var routes: MutableLiveData<List<Route>>
+    private lateinit var route: MutableLiveData<Route>
 
     lateinit var errorCallback: (message: String?) -> Unit
 
@@ -36,18 +37,44 @@ class RoutesViewModel : BaseViewModel() {
 
             override fun onResponse(call: Call<JsendResponse>, response: Response<JsendResponse>) {
                 val body = response.body()
-                if (body?.status == "success") {
-                    routes.value = body.listData as List<Route>?
-                } else {
-                    if (body?.data != null) {
-                        errorCallback((body.data as JsendFail).message)
-                    } else {
-                        errorCallback(body?.message)
+                if (body != null) {
+                    when(body.status) {
+                        "success" -> routes.value = body.listData as List<Route>?
+                        "fail" -> errorCallback((body.data as JsendFail).message)
+                        "error" -> errorCallback(body.message)
                     }
                 }
             }
         }
         api.getRoutes().enqueue(callback)
+    }
+
+    fun getRoute(): LiveData<Route> {
+        if (!::route.isInitialized) {
+            route = MutableLiveData()
+            loadRoute(routeId)
+        }
+        return route
+    }
+
+    private fun loadRoute(routeId: Int) {
+        val callback = object: Callback<JsendResponse> {
+            override fun onFailure(call: Call<JsendResponse>, t: Throwable) {
+                errorCallback("Network error ${t.message}")
+            }
+
+            override fun onResponse(call: Call<JsendResponse>, response: Response<JsendResponse>) {
+                val body = response.body()
+                if (body != null) {
+                    when(body.status) {
+                        "success" -> route.value = body.data as Route?
+                        "fail" -> errorCallback((body.data as JsendFail).message)
+                        "error" -> errorCallback(body.message)
+                    }
+                }
+            }
+        }
+        api.getRoute(routeId).enqueue(callback)
     }
 
     fun searchRoutes(

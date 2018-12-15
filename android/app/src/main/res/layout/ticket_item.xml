@@ -22,7 +22,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:drawableStart="@drawable/ic_hash"
-            android:drawablePadding="4dp"
+            android:drawablePadding="2dp"
             android:text="@string/flight_number_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
