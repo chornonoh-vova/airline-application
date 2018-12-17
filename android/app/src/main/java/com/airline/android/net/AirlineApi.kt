@@ -1,6 +1,7 @@
 package com.airline.android.net
 
 import com.airline.android.AddPassengerRequest
+import com.airline.android.BuyTicketRequest
 import com.airline.android.LoginRequest
 import com.airline.android.model.JsendResponse
 import retrofit2.Call
@@ -23,8 +24,14 @@ interface AirlineApi {
     @GET("/flights")
     fun getFlights(): Call<JsendResponse>
 
-    @GET("tickets")
+    @GET("/flights/{flightId}")
+    fun getFlight(@Path("flightId") flightId: Int): Call<JsendResponse>
+
+    @GET("/tickets")
     fun getTickets(): Call<JsendResponse>
+
+    @POST("/tickets/{flightId}")
+    fun buyTicket(@Path("flightId") flightId: Int, @Body req: BuyTicketRequest): Call<JsendResponse>
 
     @GET("/search/flights")
     fun searchFlights(

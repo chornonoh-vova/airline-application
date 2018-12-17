@@ -35,7 +35,9 @@ class RouteDetailsActivity: AppCompatActivity(), CallbackActivity {
 
         intent.extras?.let {
             routesViewModel = ViewModelProviders.of(this).get(RoutesViewModel::class.java)
+            routesViewModel.errorCallback = errorCallback
             val viewModel = ViewModelProviders.of(this).get(FlightsViewModel::class.java)
+            viewModel.errorCallback = errorCallback
             viewModel.routeId.value = it.getInt(Const.ROUTE_ID_KEY)
             routesViewModel.routeId = it.getInt(Const.ROUTE_ID_KEY)
         }
@@ -50,4 +52,8 @@ class RouteDetailsActivity: AppCompatActivity(), CallbackActivity {
 
     override fun showSnackbar(message: String) =
         Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_SHORT).show()
+
+    private val errorCallback: (message: String?) -> Unit = {
+        showSnackbar(it.toString())
+    }
 }

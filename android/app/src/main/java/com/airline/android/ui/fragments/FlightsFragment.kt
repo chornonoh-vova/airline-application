@@ -1,5 +1,6 @@
 package com.airline.android.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airline.android.Const
+import com.airline.android.FlightItemClick
 import com.airline.android.R
 import com.airline.android.ui.CallbackActivity
+import com.airline.android.ui.FlightDetailsActivity
 import com.airline.android.ui.adapter.FlightsAdapter
 import com.airline.android.vm.FlightsViewModel
 
@@ -27,7 +31,7 @@ class FlightsFragment : Fragment() {
         flightsList = view.findViewById(R.id.flights_list)
         flightsViewModel = ViewModelProviders.of(activity!!).get(FlightsViewModel::class.java)
         flightsViewModel.errorCallback = errorCallback
-        flightsAdapter = FlightsAdapter(emptyList())
+        flightsAdapter = FlightsAdapter(emptyList(), flightDetails)
         flightsList.apply {
             layoutManager = LinearLayoutManager(activity)
             itemAnimator = DefaultItemAnimator()
@@ -39,6 +43,12 @@ class FlightsFragment : Fragment() {
                 flightsAdapter.dataset = it
             })
         })
+    }
+
+    private val flightDetails: FlightItemClick = {
+        val intent = Intent(activity, FlightDetailsActivity::class.java)
+        intent.putExtra(Const.FLIGHT_ID_KEY, it.flightId)
+        activity?.startActivity(intent)
     }
 
     private val errorCallback: (message: String?) -> Unit = {

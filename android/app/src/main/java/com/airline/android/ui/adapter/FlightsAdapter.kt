@@ -5,10 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.airline.android.FlightItemClick
 import com.airline.android.R
 import com.airline.android.model.Flight
 
-class FlightsAdapter(dataset: List<Flight>) : RecyclerView.Adapter<FlightsAdapter.ViewHolder>() {
+class FlightsAdapter(
+    dataset: List<Flight>,
+    private val listener: FlightItemClick
+) : RecyclerView.Adapter<FlightsAdapter.ViewHolder>() {
     var dataset = dataset
         set(value) {
             field = value
@@ -27,11 +31,18 @@ class FlightsAdapter(dataset: List<Flight>) : RecyclerView.Adapter<FlightsAdapte
             R.string.flight_status_text,
             dataset[position].cancellationStatus.toString()
         )
+        holder.bind(dataset[position], listener)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val departure: TextView = itemView.findViewById(R.id.flight_departure_text)
         val arrival: TextView = itemView.findViewById(R.id.flight_arrival_text)
         val status: TextView = itemView.findViewById(R.id.flight_cancellation)
+
+        fun bind(flight: Flight, listener: FlightItemClick) {
+            itemView.setOnClickListener {
+                listener(flight)
+            }
+        }
     }
 }

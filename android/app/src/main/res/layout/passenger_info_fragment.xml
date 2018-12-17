@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/phone_number_text"
-            android:inputType="text" />
+            android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
