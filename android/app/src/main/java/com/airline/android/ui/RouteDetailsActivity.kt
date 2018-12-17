@@ -31,6 +31,7 @@ class RouteDetailsActivity: AppCompatActivity(), CallbackActivity {
         mToolbar.title = getText(R.string.routes_activity)
         setSupportActionBar(mToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
 
         intent.extras?.let {
             routesViewModel = ViewModelProviders.of(this).get(RoutesViewModel::class.java)
