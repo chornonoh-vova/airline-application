@@ -2,10 +2,7 @@ package com.airline.api.model;
 
 import com.airline.api.utils.JsendData;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +10,7 @@ import java.io.Serializable;
 public class Tickets implements Serializable, JsendData {
   @Id
   @Column(name = "ticket_id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int ticketId;
   @Column(name = "flight_id")
   private int flightId;

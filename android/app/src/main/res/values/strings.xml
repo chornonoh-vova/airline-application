@@ -42,8 +42,9 @@
     <string name="route_id_text">Route number is: %1$d</string>
     <string name="departure_text">Departs at: %1$s</string>
     <string name="arrival_text">Arrives at: %1$s</string>
-    <string name="flight_description_text">Total information about ticket</string>
+    <string name="flight_description_text">Total information about tickets</string>
     <string name="buy_ticket_text">Buy</string>
+    <string name="seats_input_text">Enter preferable seat</string>
 
     <!-- For routes spinner -->
     <string-array name="routes_sort_by">

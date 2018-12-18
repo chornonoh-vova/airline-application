@@ -9,4 +9,5 @@ public interface TicketsService {
   List<Tickets> getAllTickets(int passengerId);
   Optional<Tickets> getTicketById(int passengerId, int ticketId);
   Tickets buy(int passengerId, int flightId, String seat);
+  boolean checkTicket(int flightId, String seat);
 }

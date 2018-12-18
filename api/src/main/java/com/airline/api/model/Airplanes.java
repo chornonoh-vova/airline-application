@@ -14,9 +14,6 @@ public class Airplanes implements JsendData, Serializable {
   @Column(name = "airplane_id")
   private int airplaneId;
 
-  @Column(name = "flight_id")
-  private int flightId;
-
   @Column(name = "airplane_number")
   private int airplaneNumber;
 
@@ -41,14 +38,6 @@ public class Airplanes implements JsendData, Serializable {
 
   public void setAirplaneId(int airplaneId) {
     this.airplaneId = airplaneId;
-  }
-
-  public int getFlightId() {
-    return flightId;
-  }
-
-  public void setFlightId(int flightId) {
-    this.flightId = flightId;
   }
 
   public int getAirplaneNumber() {

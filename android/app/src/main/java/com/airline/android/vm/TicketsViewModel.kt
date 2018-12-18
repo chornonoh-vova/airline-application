@@ -2,7 +2,8 @@ package com.airline.android.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.airline.android.BuyTicketRequest
+import com.airline.android.BuyTicketsRequest
+import com.airline.android.CheckTicketRequest
 import com.airline.android.model.JsendFail
 import com.airline.android.model.JsendResponse
 import com.airline.android.model.Ticket
@@ -12,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class TicketsViewModel(var purchaseEnabled: Boolean = false) : BaseViewModel() {
+class TicketsViewModel: BaseViewModel() {
     @Inject
     lateinit var api: AirlineApi
 
@@ -48,7 +49,7 @@ class TicketsViewModel(var purchaseEnabled: Boolean = false) : BaseViewModel() {
         api.getTickets().enqueue(callback)
     }
 
-    fun purchase(flightId: Int): LiveData<Ticket> {
+    fun purchase(flightId: Int, seats: List<String>): LiveData<Ticket> {
         val ticket = MutableLiveData<Ticket>()
         val callback = object : Callback<JsendResponse> {
             override fun onFailure(call: Call<JsendResponse>, t: Throwable) {
@@ -66,8 +67,23 @@ class TicketsViewModel(var purchaseEnabled: Boolean = false) : BaseViewModel() {
                 }
             }
         }
-        api.buyTicket(flightId, BuyTicketRequest("1A")).enqueue(callback)
+        api.buyTicket(flightId, BuyTicketsRequest(seats)).enqueue(callback)
         return ticket
+    }
+
+    fun checkTicket(flightId: Int, seat: String): LiveData<JsendResponse> {
+        val result = MutableLiveData<JsendResponse>()
+        val callback = object : Callback<JsendResponse> {
+            override fun onFailure(call: Call<JsendResponse>, t: Throwable) {
+                errorCallback("Network error: ${t.message}")
+            }
+
+            override fun onResponse(call: Call<JsendResponse>, response: Response<JsendResponse>) {
+                result.value = response.body()
+            }
+        }
+        api.checkTicket(flightId, CheckTicketRequest(seat)).enqueue(callback)
+        return result
     }
 
 }

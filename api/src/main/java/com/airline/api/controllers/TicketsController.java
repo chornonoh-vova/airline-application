@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -74,9 +75,12 @@ public class TicketsController extends BaseController {
       if (user.getPassenger() == null) {
         return fail("Add passenger info before");
       }
+      List<Tickets> res = new LinkedList<>();
+      for (String seat: body.seats) {
+        res.add(ticketsService.buy(user.getPassenger().getPassengerId(), flightId, seat));
+      }
       JsendData data = new JsendData() {
-        public Tickets ticket =
-            ticketsService.buy(user.getPassenger().getPassengerId(), flightId, body.seat);
+        public List<Tickets> tickets = res;
       };
       return success(data);
     } else {
@@ -84,5 +88,26 @@ public class TicketsController extends BaseController {
     }
   }
 
-  private static class BuyRequest { public String seat; }
+  @PostMapping("/tickets/{flightId}/check")
+  @ResponseBody
+  public JsendResponse checkTicket(@RequestHeader(name = "Authorization") String authorization,
+                                   @PathVariable int flightId, @RequestBody CheckTicketRequest body) {
+    String sessionKey = HeaderUtils.getSessionKey(authorization);
+    Users user = authService.getUserBySessionKey(sessionKey);
+    if (user != null) {
+      if (user.getPassenger() == null) {
+        return fail("Add passenger info before");
+      }
+      if (ticketsService.checkTicket(flightId, body.seat)) {
+        return success("Ticket is available");
+      } else {
+        return fail("Ticket is unavailable or seat number is wrong");
+      }
+    } else {
+      return authHelper.UNAUTHORIZED;
+    }
+  }
+
+  private static class CheckTicketRequest { public String seat; }
+  private static class BuyRequest { public String[] seats; }
 }
