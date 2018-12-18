@@ -14,10 +14,6 @@
             android:icon="@drawable/ic_ticket"
             android:title="@string/tickets_action"/>
         <item
-            android:id="@+id/profile_action"
-            android:icon="@drawable/ic_profile"
-            android:title="@string/profile_action"/>
-        <item
             android:id="@+id/logout_action"
             android:icon="@drawable/ic_logout"
             android:title="@string/logout_action"/>

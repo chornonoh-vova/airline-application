@@ -85,28 +85,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/routes_link" />
 
-    <TextView
-        android:id="@+id/profile_link"
-        style="@style/TextAppearance.MaterialComponents.Body1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_corner"
-        android:drawableEnd="@drawable/ic_arrow_forward"
-        android:elevation="2dp"
-        android:padding="8dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/profile_action"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tickets_link" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
