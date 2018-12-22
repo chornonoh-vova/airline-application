@@ -21,7 +21,7 @@
         tools:layout_conversion_absoluteHeight="46dp"
         tools:layout_conversion_absoluteWidth="280dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/to_field"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -70,7 +70,7 @@
             tools:layout_conversion_absoluteHeight="46dp"
             tools:layout_conversion_absoluteWidth="368dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/from_field"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
